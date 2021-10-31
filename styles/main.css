@@ -10,3 +10,13 @@
 .d-none {
   display: none;
 }
+a {
+  text-decoration: none;
+}
+a:visited,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
