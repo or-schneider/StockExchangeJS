@@ -38,11 +38,22 @@ async function fetchResults(searchTarget){
     return data;
 }
 function updateResults(results){
-    showResults(results.length);
-    for (let i = 0; i < results.length; i++) {
-        const result = results[i];
-        const resultNode = resultNodes[i];
+    let endIndex = Math.min(results.length,resultNodes.length);
+    showResults(endIndex);
+    for (let i = 0; i < endIndex; i++) {
+        let result = results[i];
+        let resultNode = resultNodes[i];
+
+        let companyNameNode = resultNode.querySelector(".search-bar-results-list-result-company-name");
+        companyNameNode.textContent = result.name;
+        
+        let symbolNode = resultNode.querySelector(".search-bar-results-list-result-symbol");
+        symbolNode.textContent = `(${result.symbol})`;
+
+
     }
+    hideResults(endIndex);
+
 }
 inputButtonNode.addEventListener('click',searchClick)
 hideResults(0);
