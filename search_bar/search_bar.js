@@ -1,5 +1,6 @@
 const inputButtonNode = document.getElementById("searchBarInputButton");
 const inputNode = document.getElementById("searchBarInput");
+const resultsLoaderNode = document.getElementById("searchBarResultsLoader");
 const resultsListNode = document.getElementById("searchBarResultsList");
 const resultNodes = resultsListNode.querySelectorAll(".search-bar-results-list-result");
 
@@ -7,10 +8,13 @@ function hideResults(startIndex){
     for (let i = startIndex; i < resultNodes.length; i++) {
         const resultNode = resultNodes[i];
         resultNode.classList.add("d-none");
-        
     }
+    if(startIndex==0)
+        resultsListNode.classList.add("d-none");
 }
 function showResults(endIndex){
+    if(endIndex>0)
+        resultsListNode.classList.remove("d-none");
     for (let i = 0; i < endIndex; i++) {
         const resultNode = resultNodes[i];
         resultNode.classList.remove("d-none");
@@ -20,7 +24,12 @@ function searchClick(){
     search(inputNode.value);   
 }
 async function search(searchString){
+    resultsLoaderNode.classList.remove("d-none");
+    
     let results = await fetchResults(searchString);
+    
+    resultsLoaderNode.classList.add("d-none");
+
     updateResults(results)
 }
 async function fetchResults(searchTarget){

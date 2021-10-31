@@ -38,3 +38,10 @@
   border-bottom: rgba(161, 161, 161, 0.342) solid 1px;
   padding-bottom: 16px;
 }
+.search-bar-results-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 18px;
+  width: 100%;
+}
