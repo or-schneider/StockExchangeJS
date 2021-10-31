@@ -23,9 +23,12 @@
   border-right: none;
   padding: 0px 12px;
 }
-.search-bar-button {
+.search-bar-input-button {
   background-color: rgb(250, 250, 250);
   border: none;
   border: solid rgba(0, 0, 0, 0.726) 1px;
   padding: 8px;
+}
+.search-bar-results-list{
+  
 }
