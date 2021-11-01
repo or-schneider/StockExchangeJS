@@ -1,3 +1,5 @@
+import {fetchAsync} from "../scripts/fetchAsync.js";
+
 const inputButtonNode = document.getElementById("searchBarInputButton");
 const inputNode = document.getElementById("searchBarInput");
 const resultsLoaderNode = document.getElementById("searchBarResultsLoader");
@@ -35,15 +37,8 @@ async function search(searchString){
 }
 async function fetchResults(searchTarget){
     const url = `${STOCK_EXCHANGE_API_ROOT_URL}search?query=${searchTarget}&limit=10&exchange=NASDAQ`
-    let response = await fetch(url);
-    let data;
-    let contentType = response.headers.get("content-type");
-    if(contentType.includes('application/json')){
-        data = await response.json();
-    }
-    else{
-        throw new Error("Unhandled contentType "+contentType);
-    }
+
+    let data = await fetchAsync(url);
     
     return data;
 }

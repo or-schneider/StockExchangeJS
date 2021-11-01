@@ -1,9 +1,9 @@
 import * as companyGraph from "./companyProfileChart.js";
+import { fetchAsync } from "../scripts/fetchAsync.js";
 
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 
-const companyProfileApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}company/profile/`
 const historicalPriceApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}historical-price-full/`
 
 const contentContainerNode = document.getElementById("companyProfileContentContainer");
@@ -16,34 +16,15 @@ const stockPriceChangesNode = document.getElementById("companyProfileStockPriceC
 const descriptionNode = document.getElementById("companyProfileStockDescription");
 
 async function fetchCompanyDataAsync(symbol){
-    const url = `${companyProfileApiUrl}${symbol}`
-
-    let response = await fetch(url);
-
-    let data;
-    let contentType = response.headers.get("content-type");
-    if(contentType.includes('application/json')){
-        data = await response.json();
-    }
-    else{
-        throw new Error("Unhandled contentType "+contentType);
-    }
+    const url = `${STOCK_EXCHANGE_API_COMPANY_PROFILE_URL}${symbol}`
+    let data = await fetchAsync(url);
     
     return data;
 }
 async function fetchHistoricalPriceAsync(symbol){
     const url = `${historicalPriceApiUrl}${symbol}?serietype=line`
 
-    let response = await fetch(url);
-
-    let data;
-    let contentType = response.headers.get("content-type");
-    if(contentType.includes('application/json')){
-        data = await response.json();
-    }
-    else{
-        throw new Error("Unhandled contentType "+contentType);
-    }
+    let data = await fetchAsync(url);
     
     return data;
 }
