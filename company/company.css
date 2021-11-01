@@ -6,10 +6,41 @@
   align-items: center;
   gap: 12px;
 }
+#companyProfileImage {
+  /* width: 32px; */
+  max-height: 64px;
+}
+#companyProfileName {
+  font-weight: 400;
+}
+.company-profile-stock-price-label,
+#companyProfileStockPrice,
+#companyProfileStockPriceChanges {
+  font-size: 1.15rem;
+}
+.company-profile-stock-price-label,
+#companyProfileStockPrice {
+  font-weight: 600;
+}
+#companyProfileStockPrice:before {
+  content: "$";
+}
+.price-changes-positive {
+  color: green;
+}
+.price-changes-negative {
+  color: red;
+}
+#companyProfileStockPriceChanges:before {
+  content: "(";
+}
+#companyProfileStockPriceChanges:after {
+  content: "%)";
+}
 .company-profile-prices-container {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
 }
 .company-profile-header-link {
   color: blue;

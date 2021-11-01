@@ -29,12 +29,27 @@ async function fetchCompanyDataAsync(symbol){
 
 async function refresh(){
     let companyData = await fetchCompanyDataAsync(params.symbol);
+    updateProfileView(companyData.profile);
+    
+}
+function updateProfileView(profileData){
+    imageNode.src = profileData.image;
+    nameNode.textContent = profileData.companyName;
+    stockPriceNode.textContent = profileData.price;
+    updateStockPriceChangesView(profileData.changesPercentage);
+    descriptionNode.textContent = profileData.description;
+    linkNode.href = profileData.website;
 
-    imageNode.src = companyData.profile.image;
-    nameNode.textContent = companyData.profile.companyName;
-    stockPriceNode.textContent = companyData.profile.price;
-    stockPriceChangesNode.textContent = companyData.profile.changesPercentage;
-    descriptionNode.textContent = companyData.profile.description;
-    linkNode.href = companyData.profile.website;
+}
+function updateStockPriceChangesView(changesPercentage){
+    stockPriceChangesNode.textContent = changesPercentage;
+    if(changesPercentage>=0){
+        stockPriceChangesNode.classList.add("price-changes-positive")
+        stockPriceChangesNode.classList.remove("price-changes-negative")
+    }
+    else{
+        stockPriceChangesNode.classList.add("price-changes-negative")
+        stockPriceChangesNode.classList.remove("price-changes-positive")
+    }
 }
 refresh();
