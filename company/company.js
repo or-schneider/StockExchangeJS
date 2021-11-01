@@ -1,7 +1,10 @@
+import * as companyGraph from "./companyProfileChart.js";
+
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 
 const companyProfileApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}company/profile/`
+const historicalPriceApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}historical-price-full/`
 
 const imageNode = document.getElementById("companyProfileImage");
 const nameNode = document.getElementById("companyProfileName");
@@ -26,10 +29,29 @@ async function fetchCompanyDataAsync(symbol){
     
     return data;
 }
+async function fetchHistoricalPriceAsync(symbol){
+    const url = `${historicalPriceApiUrl}${symbol}?serietype=line`
+
+    let response = await fetch(url);
+
+    let data;
+    let contentType = response.headers.get("content-type");
+    if(contentType.includes('application/json')){
+        data = await response.json();
+    }
+    else{
+        throw new Error("Unhandled contentType "+contentType);
+    }
+    
+    return data;
+}
 
 async function refresh(){
     let companyData = await fetchCompanyDataAsync(params.symbol);
     updateProfileView(companyData.profile);
+    let historicalPriceData = await fetchHistoricalPriceAsync(params.symbol);
+
+    companyGraph.updateGraph(historicalPriceData);
     
 }
 function updateProfileView(profileData){
@@ -39,7 +61,6 @@ function updateProfileView(profileData){
     updateStockPriceChangesView(profileData.changesPercentage);
     descriptionNode.textContent = profileData.description;
     linkNode.href = profileData.website;
-
 }
 function updateStockPriceChangesView(changesPercentage){
     stockPriceChangesNode.textContent = changesPercentage;
