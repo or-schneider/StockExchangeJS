@@ -1,5 +1,12 @@
-.company-profile {
-  gap: 32px;
+#companyProfileContentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.company-profile-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .company-profile-header {
   display: flex;

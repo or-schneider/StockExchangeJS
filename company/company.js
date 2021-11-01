@@ -6,6 +6,8 @@ const params = Object.fromEntries(urlSearchParams.entries());
 const companyProfileApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}company/profile/`
 const historicalPriceApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}historical-price-full/`
 
+const contentContainerNode = document.getElementById("companyProfileContentContainer");
+const loaderNode = document.getElementById("companyProfileLoader");
 const imageNode = document.getElementById("companyProfileImage");
 const nameNode = document.getElementById("companyProfileName");
 const linkNode = document.getElementById("companyProfileHeaderLink");
@@ -47,12 +49,15 @@ async function fetchHistoricalPriceAsync(symbol){
 }
 
 async function refresh(){
+    loaderNode.classList.remove("d-none");
     let companyData = await fetchCompanyDataAsync(params.symbol);
     updateProfileView(companyData.profile);
     let historicalPriceData = await fetchHistoricalPriceAsync(params.symbol);
 
     companyGraph.updateGraph(historicalPriceData);
-    
+
+    contentContainerNode.classList.remove("d-none");
+    loaderNode.classList.add("d-none");
 }
 function updateProfileView(profileData){
     imageNode.src = profileData.image;
@@ -73,4 +78,9 @@ function updateStockPriceChangesView(changesPercentage){
         stockPriceChangesNode.classList.remove("price-changes-positive")
     }
 }
-refresh();
+function init(){
+    contentContainerNode.classList.add("d-none");
+    loaderNode.classList.add("d-none");
+    refresh();
+}
+init();
