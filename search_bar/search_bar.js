@@ -4,8 +4,7 @@ const resultsLoaderNode = document.getElementById("searchBarResultsLoader");
 const resultsListNode = document.getElementById("searchBarResultsList");
 const resultNodes = resultsListNode.querySelectorAll(".search-bar-results-list-result");
 
-const stocksRootUrl = "https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/"
-const resultLocalUrl = "./pages/company.html";
+const resultLocalUrl = "./company/company.html";
 function hideResults(startIndex){
     for (let i = startIndex; i < resultNodes.length; i++) {
         const resultNode = resultNodes[i];
@@ -35,7 +34,7 @@ async function search(searchString){
     updateResults(results)
 }
 async function fetchResults(searchTarget){
-    const url = `${stocksRootUrl}search?query=${searchTarget}&limit=10&exchange=NASDAQ`
+    const url = `${STOCK_EXCHANGE_API_ROOT_URL}search?query=${searchTarget}&limit=10&exchange=NASDAQ`
     let response = await fetch(url);
     let data;
     let contentType = response.headers.get("content-type");
@@ -63,7 +62,7 @@ function updateResults(results){
 
         let linkNode = resultNode.querySelector(".search-bar-results-list-result-link");
         linkNode.href = `${resultLocalUrl}?symbol=${result.symbol}`
-        // linkNode.href = `${stocksRootUrl}company.html?symbol=${result.symbol}`
+        
 
     }
     hideResults(endIndex);
