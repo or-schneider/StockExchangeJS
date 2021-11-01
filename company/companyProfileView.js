@@ -1,10 +1,9 @@
 import * as companyGraph from "./companyProfileChart.js";
-import { fetchAsync } from "../scripts/fetchAsync.js";
+import { fetchCompanyDataAsync,fetchHistoricalPriceAsync } from "./companyProfile.js";
 
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 
-const historicalPriceApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}historical-price-full/`
 
 const contentContainerNode = document.getElementById("companyProfileContentContainer");
 const loaderNode = document.getElementById("companyProfileLoader");
@@ -15,19 +14,6 @@ const stockPriceNode = document.getElementById("companyProfileStockPrice");
 const stockPriceChangesNode = document.getElementById("companyProfileStockPriceChanges");
 const descriptionNode = document.getElementById("companyProfileStockDescription");
 
-async function fetchCompanyDataAsync(symbol){
-    const url = `${STOCK_EXCHANGE_API_COMPANY_PROFILE_URL}${symbol}`
-    let data = await fetchAsync(url);
-    
-    return data;
-}
-async function fetchHistoricalPriceAsync(symbol){
-    const url = `${historicalPriceApiUrl}${symbol}?serietype=line`
-
-    let data = await fetchAsync(url);
-    
-    return data;
-}
 
 async function refresh(){
     loaderNode.classList.remove("d-none");
