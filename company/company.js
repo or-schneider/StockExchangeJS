@@ -3,6 +3,13 @@ const params = Object.fromEntries(urlSearchParams.entries());
 
 const companyProfileApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}company/profile/`
 
+const imageNode = document.getElementById("companyProfileImage");
+const nameNode = document.getElementById("companyProfileName");
+const symbolNode = document.getElementById("companyProfileSymbol");
+const stockPriceNode = document.getElementById("companyProfileStockPrice");
+const stockPriceChangesNode = document.getElementById("companyProfileStockPriceChanges");
+const descriptionNode = document.getElementById("companyProfileStockDescription");
+
 async function fetchCompanyDataAsync(symbol){
     const url = `${companyProfileApiUrl}${symbol}`
 
@@ -22,7 +29,13 @@ async function fetchCompanyDataAsync(symbol){
 
 async function refresh(){
     let companyData = await fetchCompanyDataAsync(params.symbol);
-    console.log(companyData);
+
+    imageNode.src = companyData.profile.image;
+    nameNode.textContent = companyData.profile.companyName;
+    symbolNode.textContent = companyData.symbol;
+    stockPriceNode.textContent = companyData.profile.price;
+    stockPriceChangesNode.textContent = companyData.profile.changesPercentage;
+    descriptionNode.textContent = companyData.profile.description;
 
 }
 refresh();
