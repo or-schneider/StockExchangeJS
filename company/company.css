@@ -1,0 +1,16 @@
+.company-profile {
+  gap: 32px;
+}
+.company-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.company-profile-prices-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.company-profile-header-link {
+  color: blue;
+}

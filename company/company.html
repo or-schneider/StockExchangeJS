@@ -8,15 +8,26 @@
 
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="./company.css" />
   </head>
   <body>
     <div class="main-container">
       <div class="main-body-container company-profile">
-        <img src="" alt="" srcset="" id="companyProfileImage">
-        <p id="companyProfileName"></p>
-        <p id="companyProfileSymbol"></p>
-        <p id="companyProfileStockPrice"></p>
-        <p id="companyProfileStockPriceChanges"></p>
+        <div class="company-profile-header">
+          <img src="" alt="" srcset="" id="companyProfileImage" />
+          <a
+            class="company-profile-header-link"
+            id="companyProfileHeaderLink"
+            href=""
+          >
+            <p id="companyProfileName"></p>
+          </a>
+        </div>
+        <div class="company-profile-prices-container">
+          <p class="company-profile-stock-price-label">Stock price:</p>
+          <p id="companyProfileStockPrice"></p>
+          <p id="companyProfileStockPriceChanges"></p>
+        </div>
         <p id="companyProfileStockDescription"></p>
       </div>
     </div>

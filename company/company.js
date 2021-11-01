@@ -5,7 +5,7 @@ const companyProfileApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}company/profile/`
 
 const imageNode = document.getElementById("companyProfileImage");
 const nameNode = document.getElementById("companyProfileName");
-const symbolNode = document.getElementById("companyProfileSymbol");
+const linkNode = document.getElementById("companyProfileHeaderLink");
 const stockPriceNode = document.getElementById("companyProfileStockPrice");
 const stockPriceChangesNode = document.getElementById("companyProfileStockPriceChanges");
 const descriptionNode = document.getElementById("companyProfileStockDescription");
@@ -32,10 +32,9 @@ async function refresh(){
 
     imageNode.src = companyData.profile.image;
     nameNode.textContent = companyData.profile.companyName;
-    symbolNode.textContent = companyData.symbol;
     stockPriceNode.textContent = companyData.profile.price;
     stockPriceChangesNode.textContent = companyData.profile.changesPercentage;
     descriptionNode.textContent = companyData.profile.description;
-
+    linkNode.href = companyData.profile.website;
 }
 refresh();
