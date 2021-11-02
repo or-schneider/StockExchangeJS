@@ -33,7 +33,6 @@ async function search(searchString){
     
     let results = await fetchResults(searchString);
     
-    resultsLoaderNode.classList.add("d-none");
 
     let companyProfiles = [];
     for (const result of results) {
@@ -41,6 +40,8 @@ async function search(searchString){
         companyProfiles.push(companyProfile);
     }
     updateResults(results,companyProfiles)
+
+    resultsLoaderNode.classList.add("d-none");
 }
 async function fetchResults(searchTarget){
     const url = `${STOCK_EXCHANGE_API_ROOT_URL}search?query=${searchTarget}&limit=10&exchange=NASDAQ`
