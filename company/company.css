@@ -32,18 +32,6 @@
 #companyProfileStockPrice:before {
   content: "$";
 }
-.price-changes-positive {
-  color: green;
-}
-.price-changes-negative {
-  color: red;
-}
-#companyProfileStockPriceChanges:before {
-  content: "(";
-}
-#companyProfileStockPriceChanges:after {
-  content: "%)";
-}
 .company-profile-prices-container {
   display: flex;
   align-items: center;

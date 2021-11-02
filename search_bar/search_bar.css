@@ -24,10 +24,34 @@
   padding: 8px 0px;
   padding-left: 16px;
   color: blue;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .search-bar-results-list-result:not(:last-child) {
   border-bottom: rgba(161, 161, 161, 0.342) solid 1px;
   padding-bottom: 16px;
+}
+.search-bar-results-list-result-text-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.search-bar-results-list-result-company-name {
+  font-size: 1.5rem;
+}
+.search-bar-results-list-result-text-aside-container {
+  display: flex;
+}
+.search-bar-results-list-result-symbol {
+  color: gray;
+}
+.search-bar-results-list-result-price-changes {
+}
+.search-bar-results-list-result-symbol,
+.search-bar-results-list-result-price-changes {
+  font-size: 0.85rem;
 }
 .search-bar-results-loader {
   display: flex;

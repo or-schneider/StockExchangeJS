@@ -1,0 +1,22 @@
+.price-changes {
+  color: gray;
+}
+.price-changes:before {
+  content: "(";
+}
+.price-changes:after {
+  content: "%)";
+}
+
+.price-changes-positive {
+  color: green;
+}
+.price-changes-positive::before {
+  content: "(+";
+}
+.price-changes-negative {
+  color: red;
+}
+.price-changes-negative::before {
+  content: "(-";
+}

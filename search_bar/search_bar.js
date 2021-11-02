@@ -1,4 +1,5 @@
 import {fetchAsync} from "../scripts/fetchAsync.js";
+import {fetchCompanyDataAsync} from "../company/companyProfile.js";
 
 const inputButtonNode = document.getElementById("searchBarInputButton");
 const inputNode = document.getElementById("searchBarInput");
@@ -33,16 +34,19 @@ async function search(searchString){
     
     resultsLoaderNode.classList.add("d-none");
 
-    updateResults(results)
+    let companyProfiles = [];
+    for (const result of results) {
+        let companyProfile = await fetchCompanyDataAsync(result.symbol);
+        companyProfiles.push(companyProfile);
+    }
+    updateResults(results,companyProfiles)
 }
 async function fetchResults(searchTarget){
     const url = `${STOCK_EXCHANGE_API_ROOT_URL}search?query=${searchTarget}&limit=10&exchange=NASDAQ`
-
-    let data = await fetchAsync(url);
-    
+    let data = fetchAsync(url);
     return data;
 }
-function updateResults(results){
+function updateResults(results,companyProfiles){
     let endIndex = Math.min(results.length,resultNodes.length);
     showResults(endIndex);
     for (let i = 0; i < endIndex; i++) {
@@ -57,6 +61,11 @@ function updateResults(results){
 
         let linkNode = resultNode.querySelector(".search-bar-results-list-result-link");
         linkNode.href = `${resultLocalUrl}?symbol=${result.symbol}`
+        let priceChangesNode = resultNode.querySelector(".search-bar-results-list-result-price-changes");
+        priceChangesNode.textContent = companyProfiles[i].profile.changesPercentage
+        
+        let imageNode = resultNode.querySelector(".search-bar-results-list-result-image");
+        imageNode.src = companyProfiles[i].profile.image;
         
 
     }
