@@ -9,23 +9,9 @@ const resultsListNode = document.getElementById("searchBarResultsList");
 const resultNodes = resultsListNode.querySelectorAll(".search-bar-results-list-result");
 
 const resultLocalUrl = "./company/company.html";
-function hideResults(startIndex){
-    for (let i = startIndex; i < resultNodes.length; i++) {
-        const resultNode = resultNodes[i];
-        resultNode.classList.add("d-none");
-    }
-    if(startIndex==0)
-        resultsListNode.classList.add("d-none");
-}
-function showResults(endIndex){
-    if(endIndex>0)
-        resultsListNode.classList.remove("d-none");
-    for (let i = 0; i < endIndex; i++) {
-        const resultNode = resultNodes[i];
-        resultNode.classList.remove("d-none");
-    }
-}
-function searchClick(){
+
+function submitSearch(event){
+    event.preventDefault();
     search(inputNode.value);   
 }
 async function search(searchString){
@@ -43,6 +29,23 @@ async function search(searchString){
 
     resultsLoaderNode.classList.add("d-none");
 }
+function hideResults(startIndex){
+    for (let i = startIndex; i < resultNodes.length; i++) {
+        const resultNode = resultNodes[i];
+        resultNode.classList.add("d-none");
+    }
+    if(startIndex==0)
+        resultsListNode.classList.add("d-none");
+}
+function showResults(endIndex){
+    if(endIndex>0)
+        resultsListNode.classList.remove("d-none");
+    for (let i = 0; i < endIndex; i++) {
+        const resultNode = resultNodes[i];
+        resultNode.classList.remove("d-none");
+    }
+}
+
 async function fetchResults(searchTarget){
     const url = `${STOCK_EXCHANGE_API_ROOT_URL}search?query=${searchTarget}&limit=10&exchange=NASDAQ`
     let data = fetchAsync(url);
@@ -74,5 +77,9 @@ function updateResults(results,companyProfiles){
     hideResults(endIndex);
 
 }
-inputButtonNode.addEventListener('click',searchClick)
-hideResults(0);
+
+function init(){
+    inputButtonNode.addEventListener('click',submitSearch)
+    hideResults(0);
+}
+init();
