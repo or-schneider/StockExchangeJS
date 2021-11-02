@@ -1,5 +1,6 @@
 import {fetchAsync} from "../scripts/fetchAsync.js";
 import {fetchCompanyDataAsync} from "../company/companyProfile.js";
+import {update as updatePriceChangesNode} from "../price_changes/price_changes_updater.js"
 
 const inputButtonNode = document.getElementById("searchBarInputButton");
 const inputNode = document.getElementById("searchBarInput");
@@ -62,7 +63,7 @@ function updateResults(results,companyProfiles){
         let linkNode = resultNode.querySelector(".search-bar-results-list-result-link");
         linkNode.href = `${resultLocalUrl}?symbol=${result.symbol}`
         let priceChangesNode = resultNode.querySelector(".search-bar-results-list-result-price-changes");
-        priceChangesNode.textContent = companyProfiles[i].profile.changesPercentage
+        updatePriceChangesNode(priceChangesNode,companyProfiles[i].profile.changesPercentage);
         
         let imageNode = resultNode.querySelector(".search-bar-results-list-result-image");
         imageNode.src = companyProfiles[i].profile.image;

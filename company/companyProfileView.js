@@ -1,5 +1,6 @@
 import * as companyGraph from "./companyProfileChart.js";
 import { fetchCompanyDataAsync,fetchHistoricalPriceAsync } from "./companyProfile.js";
+import {update as updatePriceChangesNode} from "../price_changes/price_changes_updater.js"
 
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
@@ -30,20 +31,9 @@ function updateProfileView(profileData){
     imageNode.src = profileData.image;
     nameNode.textContent = profileData.companyName;
     stockPriceNode.textContent = profileData.price;
-    updateStockPriceChangesView(profileData.changesPercentage);
+    updatePriceChangesNode(stockPriceChangesNode, profileData.changesPercentage)
     descriptionNode.textContent = profileData.description;
     linkNode.href = profileData.website;
-}
-function updateStockPriceChangesView(changesPercentage){
-    stockPriceChangesNode.textContent = changesPercentage;
-    if(changesPercentage>=0){
-        stockPriceChangesNode.classList.add("price-changes-positive")
-        stockPriceChangesNode.classList.remove("price-changes-negative")
-    }
-    else{
-        stockPriceChangesNode.classList.add("price-changes-negative")
-        stockPriceChangesNode.classList.remove("price-changes-positive")
-    }
 }
 function init(){
     contentContainerNode.classList.add("d-none");

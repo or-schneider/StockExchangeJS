@@ -44,6 +44,11 @@
 .search-bar-results-list-result-text-aside-container {
   display: flex;
 }
+.search-bar-results-list-result-image {
+  max-height: 32px;
+  color: #000;
+}
+
 .search-bar-results-list-result-symbol {
   color: gray;
 }

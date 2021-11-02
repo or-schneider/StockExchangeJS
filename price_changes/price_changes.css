@@ -17,6 +17,3 @@
 .price-changes-negative {
   color: red;
 }
-.price-changes-negative::before {
-  content: "(-";
-}
