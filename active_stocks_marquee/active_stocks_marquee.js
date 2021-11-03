@@ -2,7 +2,9 @@ import { fetchAsync } from "../scripts/fetchAsync.js";
 
 const marqueeNodeContainer = document.getElementById("activeStocksMarquee");
 const activeStocksUrl = `${STOCK_EXCHANGE_API_ROOT_URL}actives`
+const marqueElementWidth = '7%';
 
+const totalStocksToDisplay = 160;
 function generateMarqueeSlider(itemNodes){
     const sliderNode = document.createElement("div");
     for (const itemNode of itemNodes) {
@@ -15,7 +17,7 @@ function createMarquee(containerNode, nodeItems){
     
     const marqueeNode = document.createElement("div");
     marqueeNode.classList.add("marquee");
-    const marqueElementWidth = '7%'
+    
     marqueeNode.style.width = `calc(${marqueElementWidth}*${nodeItems.length})`;
     const sliderNode = generateMarqueeSlider(nodeItems);
     sliderNode.classList.add("marquee-slider");
@@ -51,8 +53,7 @@ function generateActiveStocksNodes(activeStocksData){
 }
 async function init(){
     let activeStocksData = await fetchAsync(activeStocksUrl)
-    let totalStocksToDisplay = 160;
-    // let activeStocksData = items.map((item)=>[item.ticker,item.price])
+
     activeStocksData.splice(totalStocksToDisplay);
 
     let activeStocksNodes = generateActiveStocksNodes(activeStocksData);
