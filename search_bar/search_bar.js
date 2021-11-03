@@ -1,5 +1,5 @@
-import {fetchAsync} from "../scripts/fetchAsync.js";
-import {fetchCompanyDataAsync} from "../company/companyProfile.js";
+import {fetchAsync} from "../scripts/fetch_async.js";
+import {fetchCompanyDataAsync} from "../company/company_profile.js";
 import {update as updatePriceChangesNode} from "../price_changes/price_changes_updater.js"
 
 class SearchBar{

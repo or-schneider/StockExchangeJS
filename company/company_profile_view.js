@@ -1,5 +1,5 @@
-import * as companyGraph from "./companyProfileChart.js";
-import { fetchCompanyDataAsync,fetchHistoricalPriceAsync } from "./companyProfile.js";
+import * as companyGraph from "./company_profile_chart.js";
+import { fetchCompanyDataAsync,fetchHistoricalPriceAsync } from "./company_profile.js";
 import {update as updatePriceChangesNode} from "../price_changes/price_changes_updater.js"
 
 const urlSearchParams = new URLSearchParams(window.location.search);

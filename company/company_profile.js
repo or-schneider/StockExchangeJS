@@ -1,4 +1,4 @@
-import {fetchAsync} from "../scripts/fetchAsync.js";
+import {fetchAsync} from "../scripts/fetch_async.js";
 
 const historicalPriceApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}historical-price-full/`
 

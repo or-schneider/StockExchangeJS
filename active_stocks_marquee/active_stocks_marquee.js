@@ -1,4 +1,4 @@
-import { fetchAsync } from "../scripts/fetchAsync.js";
+import { fetchAsync } from "../scripts/fetch_async.js";
 import {Marquee} from "./marquee/marquee.js"
 const marqueeNodeContainer = document.getElementById("activeStocksMarquee");
 class ActiveStocksMarquee{
