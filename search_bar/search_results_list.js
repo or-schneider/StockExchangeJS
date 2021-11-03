@@ -2,11 +2,12 @@ import {update as updatePriceChangesNode} from "../price_changes/price_changes_u
 
 export class SearchResultsList{
     resultsTotal = 10;
-    constructor(){
+    constructor(resultListNode){
+        this.resultsListNode = resultListNode;
         this.init();
     }
     init(){
-        this.resultsListNode = document.getElementById("searchBarResultsList");
+        this.companyPageLocalUrl = "./company/company.html";
 
         this.resultNodes = this.generateResultNodes(this.resultsTotal);
         this.resultNodes.forEach(resultNode => {
@@ -88,7 +89,7 @@ export class SearchResultsList{
             symbolNode.textContent = `(${symbol})`;
 
             let linkNode = resultNode.querySelector(".search-bar-results-list-result-link");
-            linkNode.href = `${this.resultLocalUrl}?symbol=${symbol}`
+            linkNode.href = `${this.companyPageLocalUrl}?symbol=${symbol}`
             let priceChangesNode = resultNode.querySelector(".search-bar-results-list-result-price-changes");
             updatePriceChangesNode(priceChangesNode,profile.changesPercentage);
             
