@@ -1,3 +1,11 @@
+.company-page-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100vh;
+  padding: 16px 15%;
+}
 #companyProfileContentContainer {
   display: flex;
   flex-direction: column;
@@ -32,6 +40,7 @@
 #companyProfileStockPrice:before {
   content: "$";
 }
+
 .company-profile-prices-container {
   display: flex;
   align-items: center;

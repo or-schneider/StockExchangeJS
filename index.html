@@ -8,116 +8,215 @@
 
     <link rel="stylesheet" href="./styles/reset.css" />
     <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./active_stocks_marquee/marquee.css" />
     <link rel="stylesheet" href="../price_changes/price_changes.css" />
     <link rel="stylesheet" href="./search_bar/search_bar.css" />
     <link rel="stylesheet" href="./loader/loader.css" />
   </head>
   <body>
     <div class="main-container">
-      <div class="main-body-container search-bar">
-        <form class="search-bar-input-container">
-          <input type="text" class="search-bar-input" id="searchBarInput" />
-          <button
-            type="submit"
-            class="button search-bar-input-button"
-            id="searchBarInputButton"
-          >
-            Search
-          </button>
-        </form>
-        <ul class="search-bar-results-list" id="searchBarResultsList">
-          <li class="search-bar-results-list-result d-none">
-            <img
-              src=""
-              alt="Logo"
-              srcset=""
-              class="search-bar-results-list-result-image"
-            />
-            <div class="search-bar-results-list-result-text-container">
-              <a href="" class="search-bar-results-list-result-link">
-                <span
-                  class="search-bar-results-list-result-company-name"
-                ></span>
-              </a>
-              <div class="search-bar-results-list-result-text-aside-container">
-                <span class="search-bar-results-list-result-symbol"></span>
-                <!-- prettier-ignore -->
-                <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+      <div id="activeStocksMarquee" class="marquee-container"></div>
+      <div class="search-page-container">
+        <div class="main-body-container search-bar">
+          <form class="search-bar-input-container">
+            <input type="text" class="search-bar-input" id="searchBarInput" />
+            <button
+              type="submit"
+              class="button search-bar-input-button"
+              id="searchBarInputButton"
+            >
+              Search
+            </button>
+          </form>
+          <ul class="search-bar-results-list" id="searchBarResultsList">
+            <li class="search-bar-results-list-result d-none">
+              <img
+                src=""
+                alt="Logo"
+                srcset=""
+                class="search-bar-results-list-result-image"
+              />
+              <div class="search-bar-results-list-result-text-container">
+                <a href="" class="search-bar-results-list-result-link">
+                  <span
+                    class="search-bar-results-list-result-company-name"
+                  ></span>
+                </a>
+                <div
+                  class="search-bar-results-list-result-text-aside-container"
+                >
+                  <span class="search-bar-results-list-result-symbol"></span>
+                  <!-- prettier-ignore -->
+                  <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+                </div>
               </div>
-            </div>
-          </li>
-          <li class="search-bar-results-list-result d-none">
-            <img
-              src=""
-              alt="Logo"
-              srcset=""
-              class="search-bar-results-list-result-image"
-            />
-            <div class="search-bar-results-list-result-text-container">
-              <a href="" class="search-bar-results-list-result-link">
-                <span
-                  class="search-bar-results-list-result-company-name"
-                ></span>
-              </a>
-              <div class="search-bar-results-list-result-text-aside-container">
-                <span class="search-bar-results-list-result-symbol"></span>
-                <!-- prettier-ignore -->
-                <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+            </li>
+            <li class="search-bar-results-list-result d-none">
+              <img
+                src=""
+                alt="Logo"
+                srcset=""
+                class="search-bar-results-list-result-image"
+              />
+              <div class="search-bar-results-list-result-text-container">
+                <a href="" class="search-bar-results-list-result-link">
+                  <span
+                    class="search-bar-results-list-result-company-name"
+                  ></span>
+                </a>
+                <div
+                  class="search-bar-results-list-result-text-aside-container"
+                >
+                  <span class="search-bar-results-list-result-symbol"></span>
+                  <!-- prettier-ignore -->
+                  <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+                </div>
               </div>
-            </div>
-          </li>
-          <li class="search-bar-results-list-result d-none">
-            <img
-              src=""
-              alt="Logo"
-              srcset=""
-              class="search-bar-results-list-result-image"
-            />
-            <div class="search-bar-results-list-result-text-container">
-              <a href="" class="search-bar-results-list-result-link">
-                <span
-                  class="search-bar-results-list-result-company-name"
-                ></span>
-              </a>
-              <div class="search-bar-results-list-result-text-aside-container">
-                <span class="search-bar-results-list-result-symbol"></span>
-                <!-- prettier-ignore -->
-                <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+            </li>
+            <li class="search-bar-results-list-result d-none">
+              <img
+                src=""
+                alt="Logo"
+                srcset=""
+                class="search-bar-results-list-result-image"
+              />
+              <div class="search-bar-results-list-result-text-container">
+                <a href="" class="search-bar-results-list-result-link">
+                  <span
+                    class="search-bar-results-list-result-company-name"
+                  ></span>
+                </a>
+                <div
+                  class="search-bar-results-list-result-text-aside-container"
+                >
+                  <span class="search-bar-results-list-result-symbol"></span>
+                  <!-- prettier-ignore -->
+                  <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+                </div>
               </div>
-            </div>
-          </li>
-          <li class="search-bar-results-list-result d-none">
-            <img
-              src=""
-              alt="Logo"
-              srcset=""
-              class="search-bar-results-list-result-image"
-            />
-            <div class="search-bar-results-list-result-text-container">
-              <a href="" class="search-bar-results-list-result-link">
-                <span
-                  class="search-bar-results-list-result-company-name"
-                ></span>
-              </a>
-              <div class="search-bar-results-list-result-text-aside-container">
-                <span class="search-bar-results-list-result-symbol"></span>
-                <!-- prettier-ignore -->
-                <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+            </li>
+            <li class="search-bar-results-list-result d-none">
+              <img
+                src=""
+                alt="Logo"
+                srcset=""
+                class="search-bar-results-list-result-image"
+              />
+              <div class="search-bar-results-list-result-text-container">
+                <a href="" class="search-bar-results-list-result-link">
+                  <span
+                    class="search-bar-results-list-result-company-name"
+                  ></span>
+                </a>
+                <div
+                  class="search-bar-results-list-result-text-aside-container"
+                >
+                  <span class="search-bar-results-list-result-symbol"></span>
+                  <!-- prettier-ignore -->
+                  <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="search-bar-results-loader">
-        <div id="searchBarResultsLoader" class="lds-dual-ring d-none"></div>
+            </li>
+            <li class="search-bar-results-list-result d-none">
+              <img
+                src=""
+                alt="Logo"
+                srcset=""
+                class="search-bar-results-list-result-image"
+              />
+              <div class="search-bar-results-list-result-text-container">
+                <a href="" class="search-bar-results-list-result-link">
+                  <span
+                    class="search-bar-results-list-result-company-name"
+                  ></span>
+                </a>
+                <div
+                  class="search-bar-results-list-result-text-aside-container"
+                >
+                  <span class="search-bar-results-list-result-symbol"></span>
+                  <!-- prettier-ignore -->
+                  <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+                </div>
+              </div>
+            </li>
+            <li class="search-bar-results-list-result d-none">
+              <img
+                src=""
+                alt="Logo"
+                srcset=""
+                class="search-bar-results-list-result-image"
+              />
+              <div class="search-bar-results-list-result-text-container">
+                <a href="" class="search-bar-results-list-result-link">
+                  <span
+                    class="search-bar-results-list-result-company-name"
+                  ></span>
+                </a>
+                <div
+                  class="search-bar-results-list-result-text-aside-container"
+                >
+                  <span class="search-bar-results-list-result-symbol"></span>
+                  <!-- prettier-ignore -->
+                  <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+                </div>
+              </div>
+            </li>
+            <li class="search-bar-results-list-result d-none">
+              <img
+                src=""
+                alt="Logo"
+                srcset=""
+                class="search-bar-results-list-result-image"
+              />
+              <div class="search-bar-results-list-result-text-container">
+                <a href="" class="search-bar-results-list-result-link">
+                  <span
+                    class="search-bar-results-list-result-company-name"
+                  ></span>
+                </a>
+                <div
+                  class="search-bar-results-list-result-text-aside-container"
+                >
+                  <span class="search-bar-results-list-result-symbol"></span>
+                  <!-- prettier-ignore -->
+                  <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+                </div>
+              </div>
+            </li>
+            <li class="search-bar-results-list-result d-none">
+              <img
+                src=""
+                alt="Logo"
+                srcset=""
+                class="search-bar-results-list-result-image"
+              />
+              <div class="search-bar-results-list-result-text-container">
+                <a href="" class="search-bar-results-list-result-link">
+                  <span
+                    class="search-bar-results-list-result-company-name"
+                  ></span>
+                </a>
+                <div
+                  class="search-bar-results-list-result-text-aside-container"
+                >
+                  <span class="search-bar-results-list-result-symbol"></span>
+                  <!-- prettier-ignore -->
+                  <span class="search-bar-results-list-result-price-changes price-changes">9</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="search-bar-results-loader">
+          <div id="searchBarResultsLoader" class="lds-dual-ring d-none"></div>
+        </div>
       </div>
     </div>
     <script src="./scripts/constants.js"></script>
-    <script type="module" src="./scripts/fetchAsync.js"></script>
+    <script type="module" src="./search_bar/search_bar.js"></script>
     <script
       type="module"
-      src="../price_changes/price_changes_updater.js"
+      src="./active_stocks_marquee/active_stocks_marquee.js"
     ></script>
-    <script type="module" src="./search_bar/search_bar.js"></script>
   </body>
 </html>

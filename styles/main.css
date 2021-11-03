@@ -1,11 +1,9 @@
 .main-container {
+  position: relative;
   background-color: rgb(230, 235, 240);
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  align-items: stretch;
   min-height: 100vh;
-  padding: 16px 15%;
 }
 .main-body-container {
   background-color: white;
