@@ -1,19 +1,20 @@
 import { fetchAsync } from "../scripts/fetch_async.js";
 import {Marquee} from "./marquee/marquee.js"
-const marqueeNodeContainer = document.getElementById("activeStocksMarquee");
-class ActiveStocksMarquee{
+export class ActiveStocksMarquee{
     nodeContainer;
     marqueeComponent;
 
-    marqueeElementWidth = '7%';
+    marqueeElementWidth = '8%';
     totalStocksToDisplay = 160;
     activeStocksUrl = `${STOCK_EXCHANGE_API_ROOT_URL}actives`;
 
     constructor(nodeContainer){
         this.nodeContainer = nodeContainer;
-        this.init();
     }
-    async init(){
+    async load(){
+        if(this.marqueeComponent)
+            this.nodeContainer.removeChild(this.nodeContainer.firstChild);
+
         let activeStocksData = await fetchAsync(this.activeStocksUrl)
         activeStocksData.splice(this.totalStocksToDisplay);
         
@@ -39,5 +40,3 @@ class ActiveStocksMarquee{
         return activeStocksNodes;
     }
 }
-
-new ActiveStocksMarquee(marqueeNodeContainer);

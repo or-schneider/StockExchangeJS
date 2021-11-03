@@ -2,6 +2,7 @@ import {fetchAsync} from "../scripts/fetch_async.js";
 import {fetchCompanyDataAsync} from "../company/company_profile.js";
 import {update as updatePriceChangesNode} from "../price_changes/price_changes_updater.js"
 import {SearchResultsList} from "./search_result.js";
+import {ActiveStocksMarquee} from "../active_stocks_marquee/active_stocks_marquee.js"
 class SearchBar{
     inputButtonNode;
     inputNode = document;
@@ -49,8 +50,11 @@ class SearchBar{
         return data;
     }
 }
+const marqueeNodeContainer = document.getElementById("activeStocksMarquee");
 
 const searchBar = new SearchBar();
 const searchResultsList = new SearchResultsList();
+const activeStocksMarquee = new ActiveStocksMarquee(marqueeNodeContainer);
+activeStocksMarquee.load();
 
 searchBar.onSearch((companies) => searchResultsList.renderResults(companies))
