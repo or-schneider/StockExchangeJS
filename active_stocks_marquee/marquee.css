@@ -1,22 +1,28 @@
-.marquee-container {
-  width: 100%;
-  /* min-width: 1920px; */
-  /* display: flex; */
-  /* align-items: center; */
-  position: relative;
-  /* z-index: 1; */
-  padding: 8px 0;
-  background-color: aquamarine;
+.active-stocks-marquee-price,
+.active-stocks-marquee-symbol {
+  font-size: 0.8rem;
 }
-.marquee {
-  width: 100%;
-  display: flex;
-  align-items: center;
+.active-stocks-marquee-price {
+  color: rgb(32, 218, 32);
+}
+.active-stocks-marquee-price::before {
+  content: "$";
+}
+.marquee-container {
+  width: calc(100vw);
   position: relative;
   overflow: hidden;
+  padding: 8px 0;
+  background-color: white;
+}
+.marquee {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
 }
 .marquee-slider {
-  width: 100%;
+  width: calc(100%);
 
   display: flex;
 
@@ -24,26 +30,31 @@
   justify-content: space-around;
 
   white-space: nowrap;
-
-  animation: marquee-scrollX 10s linear infinite;
+  flex-wrap: nowrap;
+  animation: marquee-scrollX 60s linear infinite;
 }
 .marquee-slider-follow {
-  position: absolute;
+  width: calc(100%);
 
-  width: 100%;
+  position: absolute;
+  flex-wrap: nowrap;
 
   display: flex;
-  align-items: center;
   justify-content: space-around;
 
   white-space: nowrap;
-
-  animation: marquee-scrollX-follow 10s linear infinite;
+  /* background-color: cornflowerblue; */
+  animation: marquee-scrollX-follow 60s linear infinite;
 }
 .marquee {
 }
 .marquee-element {
-  /* width: 25%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  /* width: calc(100% / 80); */
 }
 @keyframes marquee-scrollX {
   0% {
@@ -55,9 +66,9 @@
 }
 @keyframes marquee-scrollX-follow {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100%));
   }
   100% {
-    transform: translateX(0);
+    transform: translateX(calc(0%));
   }
 }

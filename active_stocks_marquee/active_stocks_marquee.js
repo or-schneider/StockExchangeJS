@@ -1,35 +1,61 @@
-const marqueeNodeContainer = document.getElementById("activeStocksMarquee");
+import { fetchAsync } from "../scripts/fetchAsync.js";
 
-function generateMarqueeSlider(items){
+const marqueeNodeContainer = document.getElementById("activeStocksMarquee");
+const activeStocksUrl = `${STOCK_EXCHANGE_API_ROOT_URL}actives`
+
+function generateMarqueeSlider(itemNodes){
     const sliderNode = document.createElement("div");
-    
-    for (const item of items) {
-        const itemNode = document.createElement("div");
+    for (const itemNode of itemNodes) {
         itemNode.classList.add("marquee-element");
-        itemNode.textContent = item;
         sliderNode.appendChild(itemNode)
     }
     return sliderNode;
 }
-function createMarquee(containerNode, items){
+function createMarquee(containerNode, nodeItems){
+    
     const marqueeNode = document.createElement("div");
     marqueeNode.classList.add("marquee");
-
-    const sliderNode = generateMarqueeSlider(items);
+    const marqueElementWidth = '7%'
+    marqueeNode.style.width = `calc(${marqueElementWidth}*${nodeItems.length})`;
+    const sliderNode = generateMarqueeSlider(nodeItems);
     sliderNode.classList.add("marquee-slider");
     
-    marqueeNode.append(sliderNode);
+    marqueeNode.appendChild(sliderNode);
+
+    const followItems = nodeItems.map((node)=>node.cloneNode(true))
     
-    const sliderFollowNode = generateMarqueeSlider(items);
+    const sliderFollowNode = generateMarqueeSlider(followItems);
     sliderFollowNode.classList.add("marquee-slider-follow");
     
     marqueeNode.appendChild(sliderFollowNode);
 
     containerNode.appendChild(marqueeNode)
 }
-function init(){
-    const items = [0,1,2,3,4,5];
-    
-    createMarquee(marqueeNodeContainer, items);
+function generateActiveStocksNodes(activeStocksData){
+    const activeStocksNodes = activeStocksData.map((activeStockData)=>{
+        const activeStockNode = document.createElement("div");
+        const tickerNode = document.createElement("div");
+        tickerNode.textContent = activeStockData.ticker;
+        activeStockNode.appendChild(tickerNode);
+        activeStockNode.classList.add("active-stocks-marquee-symbol");
+
+        const priceNode = document.createElement("div");
+        priceNode.textContent = activeStockData.price;
+        priceNode.classList.add("active-stocks-marquee-price");
+        
+        activeStockNode.appendChild(priceNode);
+
+        return activeStockNode;
+    })
+    return activeStocksNodes;
+}
+async function init(){
+    let activeStocksData = await fetchAsync(activeStocksUrl)
+    let totalStocksToDisplay = 160;
+    // let activeStocksData = items.map((item)=>[item.ticker,item.price])
+    activeStocksData.splice(totalStocksToDisplay);
+
+    let activeStocksNodes = generateActiveStocksNodes(activeStocksData);
+    createMarquee(marqueeNodeContainer, activeStocksNodes);
 }
 init();
