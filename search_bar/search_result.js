@@ -7,13 +7,54 @@ export class SearchResultsList{
     }
     init(){
         this.resultsListNode = document.getElementById("searchBarResultsList");
-        this.resultNodes = this.resultsListNode.querySelectorAll(".search-bar-results-list-result");
 
-        this.generateResultNodes(this.resultsTotal);
+        this.resultNodes = this.generateResultNodes(this.resultsTotal);
+        this.resultNodes.forEach(resultNode => {
+            this.resultsListNode.appendChild(resultNode);    
+        });
+
         this.hideResults(0);
     }
-    generateResultNodes(){
-        
+    generateResultNodes(amount){
+        const resultNodes = [];
+        for (let i = 0; i < amount; i++) {
+            
+            const resultNode = document.createElement("li");
+            resultNode.classList.add("search-bar-results-list-result");
+
+            const imageNode = document.createElement("img");
+            imageNode.classList.add("search-bar-results-list-result-image");
+            imageNode.alt="logo";
+            resultNode.appendChild(imageNode)
+            
+            const textContainerNode = document.createElement("div");
+            textContainerNode.classList.add("search-bar-results-list-result-text-container");
+            resultNode.appendChild(textContainerNode)
+            
+            const linkNode = document.createElement("a");
+            linkNode.classList.add("search-bar-results-list-result-link");
+            textContainerNode.appendChild(linkNode)
+            
+            const nameNode = document.createElement("span");
+            nameNode.classList.add("search-bar-results-list-result-company-name");
+            linkNode.appendChild(nameNode);
+            
+            const textAsideContainerNode = document.createElement("div");
+            textAsideContainerNode.classList.add("search-bar-results-list-result-text-aside-container");
+            textContainerNode.appendChild(textAsideContainerNode)
+            
+            const symbolNode = document.createElement("span");
+            symbolNode.classList.add("search-bar-results-list-result-symbol");
+            textAsideContainerNode.appendChild(symbolNode);
+            
+            const priceChangesNode = document.createElement("span");
+            priceChangesNode.classList.add("search-bar-results-list-result-price-changes");
+            priceChangesNode.classList.add("price-changes");
+            textAsideContainerNode.appendChild(priceChangesNode);
+            
+            resultNodes.push(resultNode);
+        }
+        return resultNodes;
     }
     hideResults(startIndex){
         for (let i = startIndex; i < this.resultNodes.length; i++) {
