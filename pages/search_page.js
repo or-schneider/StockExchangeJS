@@ -4,8 +4,8 @@ import {ActiveStocksMarquee} from "../active_stocks_marquee/active_stocks_marque
 
 const marqueeNode = document.getElementById("activeStocksMarquee");
 const resultsListNode = document.getElementById("searchBarResultsList");
-
-const searchBar = new SearchBar();
+const searchBarNode = document.getElementById('searchBar');
+const searchBar = new SearchBar(searchBarNode);
 const searchResultsList = new SearchResultsList(resultsListNode);
 const activeStocksMarquee = new ActiveStocksMarquee(marqueeNode);
 activeStocksMarquee.load();

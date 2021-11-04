@@ -2,21 +2,43 @@ import {fetchAsync} from "../scripts/fetch_async.js";
 import {fetchCompanyDataAsync} from "../company/company_profile.js";
 
 export class SearchBar{
+    searchBarNode;
     inputButtonNode;
     inputNode = document;
     resultsLoaderNode;
 
     onSearchListeners = [];
 
-    constructor(){
+    constructor(searchBarNode){
+        this.searchBarNode = searchBarNode;
         this.init();    
     }
     init(){
-        this.inputButtonNode = document.getElementById("searchBarInputButton");
-        this.inputNode = document.getElementById("searchBarInput");
+        // this.inputButtonNode = document.getElementById("searchBarInputButton");
+        // this.inputNode = document.getElementById("searchBarInput");
         this.resultsLoaderNode = document.getElementById("searchBarResultsLoader");
+        
+        
+        this.generate(this.searchBarNode);
 
-        this.inputButtonNode.addEventListener('click',this.submitSearch.bind(this))
+        this.inputButtonNode.addEventListener('click',this.submitSearch.bind(this));
+    }
+    generate(searchBarNode){
+        let searchBarForm = document.createElement("form");
+        searchBarForm.classList.add("search-bar-input-container");
+        searchBarNode.appendChild(searchBarForm);
+
+        this.inputNode = document.createElement("input");
+        this.inputNode.classList.add("search-bar-input");
+        searchBarForm.appendChild(this.inputNode);
+        
+        this.inputButtonNode = document.createElement("input");
+        this.inputButtonNode.classList.add("button");
+        this.inputButtonNode.classList.add("search-bar-input-button");
+        this.inputButtonNode.type = "submit";
+        this.inputButtonNode.textContent = "Search";
+        searchBarForm.appendChild(this.inputButtonNode);
+        
     }
     onSearch(listener){
         this.onSearchListeners.push(listener);
