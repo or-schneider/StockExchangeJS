@@ -6,7 +6,7 @@
   min-height: 100vh;
   padding: 16px 15%;
 }
-#companyProfileContentContainer {
+.company-profile-content-container {
   display: flex;
   flex-direction: column;
   gap: 26px;
@@ -21,23 +21,23 @@
   align-items: center;
   gap: 12px;
 }
-#companyProfileImage {
+.company-profile-image {
   /* width: 32px; */
   max-height: 64px;
 }
-#companyProfileName {
+.company-profile-name {
   font-weight: 400;
 }
 .company-profile-stock-price-label,
-#companyProfileStockPrice,
-#companyProfileStockPriceChanges {
+.company-profile-stock-price,
+.company-profile-stock-price-changes {
   font-size: 1.15rem;
 }
 .company-profile-stock-price-label,
-#companyProfileStockPrice {
+.company-profile-stock-price {
   font-weight: 600;
 }
-#companyProfileStockPrice:before {
+.company-profile-stock-price:before {
   content: "$";
 }
 

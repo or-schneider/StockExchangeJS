@@ -1,5 +1,3 @@
-const chartNode = document.getElementById('companyProfileChart').getContext('2d');
-
 export class CompanyProfileChartConfig{
     config;
     constructor(nodeContainer){

@@ -9,17 +9,62 @@ export class CompanyProfileView{
         this.init();
     }
     init(){
-        this.contentContainerNode = document.getElementById("companyProfileContentContainer");
-        this.loaderNode = document.getElementById("companyProfileLoader");
-        this.imageNode = document.getElementById("companyProfileImage");
-        this.nameNode = document.getElementById("companyProfileName");
-        this.linkNode = document.getElementById("companyProfileHeaderLink");
-        this.stockPriceNode = document.getElementById("companyProfileStockPrice");
-        this.stockPriceChangesNode = document.getElementById("companyProfileStockPriceChanges");
-        this.descriptionNode = document.getElementById("companyProfileStockDescription");
+        this.generate();
 
         this.contentContainerNode.classList.add("d-none");
-        this.loaderNode.classList.add("d-none");
+        this.loaderNodeContainer.classList.add("d-none");
+    }
+    generate(){
+
+        this.loaderNodeContainer = document.createElement("div");
+        this.loaderNodeContainer.classList.add("company-profile-loader-container");
+        this.containerNode.appendChild(this.loaderNodeContainer);
+
+        this.loaderNode = document.createElement("div");
+        this.loaderNode.classList.add("lds-dual-ring");
+        this.loaderNodeContainer.appendChild(this.loaderNode);
+
+        this.contentContainerNode = document.createElement("div");
+        this.contentContainerNode.classList.add("company-profile-content-container");
+        this.containerNode.appendChild(this.contentContainerNode);
+        
+        this.headerNode = document.createElement("div");
+        this.headerNode.classList.add("company-profile-header");
+        this.contentContainerNode.appendChild(this.headerNode);
+
+        this.imageNode = document.createElement("img");
+        this.imageNode.classList.add("company-profile-image");
+        this.headerNode.appendChild(this.imageNode);
+        
+        this.linkNode = document.createElement("a");
+        this.linkNode.classList.add("company-profile-header-link");
+        this.headerNode.appendChild(this.linkNode);
+
+        this.nameNode = document.createElement("h2");
+        this.nameNode.classList.add("company-profile-name");
+        this.linkNode.appendChild(this.nameNode);
+
+        this.stockPricesContainerNode = document.createElement("div");
+        this.stockPricesContainerNode.classList.add("company-profile-prices-container");
+        this.contentContainerNode.appendChild(this.stockPricesContainerNode);
+
+        this.stockPriceLabelNode = document.createElement("p");
+        this.stockPriceLabelNode.classList.add("company-profile-stock-price-label");
+        this.stockPriceLabelNode.textContent = "Stock price:"
+        this.stockPricesContainerNode.appendChild(this.stockPriceLabelNode);
+
+        this.stockPriceNode = document.createElement("p");
+        this.stockPriceNode.classList.add("company-profile-stock-price");
+        this.stockPricesContainerNode.appendChild(this.stockPriceNode);
+
+        this.stockPriceChangesNode = document.createElement("p");
+        this.stockPriceChangesNode.classList.add("company-profile-stock-price-changes");
+        this.stockPriceChangesNode.classList.add("price-changes");
+        this.stockPricesContainerNode.appendChild(this.stockPriceChangesNode);
+
+        this.descriptionNode = document.createElement("p");
+        // this.descriptionNode.classList.add("");
+        this.contentContainerNode.appendChild(this.descriptionNode);
     }
     hide(){
         this.contentContainerNode.classList.add("d-none");
@@ -36,15 +81,19 @@ export class CompanyProfileView{
         this.linkNode.href = companyData.profile.website;
     }
     addChart(chartConfigData){
-        this.chartNode = document.getElementById('companyProfileChart').getContext('2d');
+        this.chartNode = document.createElement('canvas');
+        this.chartNode.width = 400;
+        this.chartNode.height = 150;
+        this.contentContainerNode.appendChild(this.chartNode);
 
-        this.Chart = new Chart(this.chartNode, chartConfigData);
+        const chartNodeContext = this.chartNode.getContext('2d');
+        this.Chart = new Chart(chartNodeContext, chartConfigData);
     }
     hideLoader(){
-        this.loaderNode.classList.add("d-none");
+        this.loaderNodeContainer.classList.add("d-none");
     }
     showLoader(){
-        this.loaderNode.classList.remove("d-none");
+        this.loaderNodeContainer.classList.remove("d-none");
     }
     
 }
