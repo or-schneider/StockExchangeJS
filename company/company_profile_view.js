@@ -1,8 +1,7 @@
 import {update as updatePriceChangesNode} from "../price_changes/price_changes_updater.js"
 
-
-
 export class CompanyProfileView{
+    
     constructor(containerNode,symbol){
         this.symbol = symbol;
         this.containerNode = containerNode;
@@ -35,6 +34,11 @@ export class CompanyProfileView{
         updatePriceChangesNode(this.stockPriceChangesNode, companyData.profile.changesPercentage)
         this.descriptionNode.textContent = companyData.profile.description;
         this.linkNode.href = companyData.profile.website;
+    }
+    addChart(chartConfigData){
+        this.chartNode = document.getElementById('companyProfileChart').getContext('2d');
+
+        this.Chart = new Chart(this.chartNode, chartConfigData);
     }
     hideLoader(){
         this.loaderNode.classList.add("d-none");
