@@ -2,21 +2,21 @@ import {update as updatePriceChangesNode} from "../price_changes/price_changes_u
 
 export class SearchResultsList{
     resultsTotal = 10;
-    constructor(resultListNode){
-        this.resultsListNode = resultListNode;
+    constructor(resultsListContainerNode){
+        this.resultListContainerNode = resultsListContainerNode;
         this.init();
     }
     init(){
         this.companyPageLocalUrl = "./company/company.html";
-
-        this.resultNodes = this.generateResultNodes(this.resultsTotal);
-        this.resultNodes.forEach(resultNode => {
-            this.resultsListNode.appendChild(resultNode);    
-        });
+        const resultNodesList = this.generateResultsListNode(this.resultsTotal);
+        this.resultListContainerNode.appendChild(resultNodesList);
 
         this.hideResults(0);
     }
-    generateResultNodes(amount){
+    generateResultsListNode(amount){
+        const resultsListNode =document.createElement("ul"); 
+        resultsListNode.classList.add("search-bar-results-list");
+        
         const resultNodes = [];
         for (let i = 0; i < amount; i++) {
             
@@ -54,8 +54,11 @@ export class SearchResultsList{
             textAsideContainerNode.appendChild(priceChangesNode);
             
             resultNodes.push(resultNode);
+            resultsListNode.appendChild(resultNode);    
+
         }
-        return resultNodes;
+        this.resultNodes = resultNodes;
+        return resultsListNode;
     }
     hideResults(startIndex){
         for (let i = startIndex; i < this.resultNodes.length; i++) {
@@ -63,11 +66,11 @@ export class SearchResultsList{
             resultNode.classList.add("d-none");
         }
         if(startIndex==0)
-            this.resultsListNode.classList.add("d-none");
+            this.resultListContainerNode.classList.add("d-none");
     }
     showResults(endIndex){
         if(endIndex>0)
-            this.resultsListNode.classList.remove("d-none");
+            this.resultListContainerNode.classList.remove("d-none");
         for (let i = 0; i < endIndex; i++) {
             const resultNode = this.resultNodes[i];
             resultNode.classList.remove("d-none");
