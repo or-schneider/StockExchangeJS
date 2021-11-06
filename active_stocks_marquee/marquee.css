@@ -9,7 +9,7 @@
   content: "$";
 }
 .marquee-container {
-  width: calc(100vw);
+  width: calc(100%);
   position: relative;
   overflow: hidden;
   padding: 8px 0;

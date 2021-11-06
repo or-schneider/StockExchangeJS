@@ -16,7 +16,7 @@ export class SearchBar{
     init(){
         // this.inputButtonNode = document.getElementById("searchBarInputButton");
         // this.inputNode = document.getElementById("searchBarInput");
-        this.resultsLoaderNode = document.getElementById("searchBarResultsLoader");
+        // this.resultsLoaderNode = document.getElementById("searchBarResultsLoader");
         
         
         this.generate(this.searchBarNode);
@@ -28,9 +28,19 @@ export class SearchBar{
         searchBarForm.classList.add("search-bar-input-container");
         searchBarNode.appendChild(searchBarForm);
 
+        const inputBoxNode = document.createElement("div");
+        inputBoxNode.classList.add("input-box");
+        searchBarForm.appendChild(inputBoxNode);
+        
         this.inputNode = document.createElement("input");
         this.inputNode.classList.add("search-bar-input");
-        searchBarForm.appendChild(this.inputNode);
+        inputBoxNode.appendChild(this.inputNode);
+        
+        this.resultsLoaderNode = document.createElement("div");
+        this.resultsLoaderNode.classList.add("lds-dual-ring");
+        this.resultsLoaderNode.classList.add("input-box-loader");
+        this.resultsLoaderNode.classList.add("d-none");
+        inputBoxNode.appendChild(this.resultsLoaderNode);
         
         this.inputButtonNode = document.createElement("input");
         this.inputButtonNode.classList.add("button");
