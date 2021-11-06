@@ -19,6 +19,9 @@
 .d-none {
   display: none !important;
 }
+.highlight-bg {
+  background-color: yellow;
+}
 a {
   text-decoration: none;
   color: blue;

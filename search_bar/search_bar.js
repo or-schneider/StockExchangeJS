@@ -58,10 +58,10 @@ export class SearchBar{
         event.preventDefault();
         this.search(this.inputNode.value);   
     }
-    async search(searchString){
+    async search(searchQuery){
         this.resultsLoaderNode.classList.remove("d-none");
         
-        let results = await this.fetchResults(searchString);
+        let results = await this.fetchResults(searchQuery);
 
         let companyProfiles = [];
         for (const result of results) {
@@ -69,7 +69,7 @@ export class SearchBar{
             companyProfiles.push(companyProfile);
         }
         for (const listener of this.onSearchListeners) {
-            listener(companyProfiles);
+            listener(searchQuery, companyProfiles);
         }
 
         this.resultsLoaderNode.classList.add("d-none");

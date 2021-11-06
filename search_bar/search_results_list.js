@@ -80,7 +80,68 @@ export class SearchResultsList{
             resultNode.classList.remove("d-none");
         }
     }
-    renderResults(companyProfiles){
+    findSequencesOfText(query,text, isCaseSensitive){
+        let originalText = text;
+        if(!isCaseSensitive){
+            query = query.toLowerCase();
+            text = text.toLowerCase();
+        }
+        const foundSequences = []
+
+        let activeSequence = [];
+        let activeSequenceStartIndex;
+
+        for (let i = 0; i < text.length; i++){
+            const letter = text[i];
+            if (letter != query[activeSequence.length]){
+                if(activeSequence.length>0)
+                    activeSequence = [];
+            }
+            if (letter == query[activeSequence.length]){
+                if(activeSequence.length == 0){
+                    activeSequenceStartIndex = i;
+                }
+                activeSequence.push(originalText[i]);
+                if(activeSequence.length == query.length)
+                {
+                    foundSequences.push({"startIndex":activeSequenceStartIndex,"text":activeSequence})
+                    activeSequence=[];
+                }
+            }
+        }
+        return foundSequences;
+    }
+    highlightNodeText(queryToHighlight,targetNode){
+        
+        queryToHighlight = queryToHighlight.toLowerCase();
+        const text = targetNode.textContent;
+
+        const sequencesToHighlight = this.findSequencesOfText(queryToHighlight,text,false)
+        
+        if(sequencesToHighlight.length == 0)
+            return
+        targetNode.textContent = "";
+        let textIndex = 0;
+        
+        for (const sequenceToHighlight of sequencesToHighlight) {
+            if(sequenceToHighlight.startIndex>textIndex){
+                const textNode = document.createTextNode(text.slice(textIndex,sequenceToHighlight.startIndex))
+                textIndex = sequenceToHighlight.startIndex;
+                targetNode.appendChild(textNode);
+            }
+            const highlightedNode = document.createElement("span");
+            highlightedNode.classList.add("highlight-bg");
+            highlightedNode.textContent = sequenceToHighlight.text.join('');
+            textIndex += sequenceToHighlight.text.length;
+
+            targetNode.appendChild(highlightedNode);
+        }
+        if(textIndex!=text.length){
+            const textNode = document.createTextNode(text.slice(textIndex,text.length))
+            targetNode.appendChild(textNode);
+        }
+    }
+    renderResults(searchQuery, companyProfiles){
         let endIndex = Math.min(companyProfiles.length,this.resultNodes.length);
         this.showResults(endIndex);
         for (let i = 0; i < endIndex; i++) {
@@ -90,10 +151,14 @@ export class SearchResultsList{
             let resultNode = this.resultNodes[i];
 
             let companyNameNode = resultNode.querySelector(".search-bar-results-list-result-company-name");
+            companyNameNode.innerHTML ="";
             companyNameNode.textContent = profile.companyName;
-            
+            this.highlightNodeText(searchQuery, companyNameNode);
+
             let symbolNode = resultNode.querySelector(".search-bar-results-list-result-symbol");
+            symbolNode.innerHTML ="";
             symbolNode.textContent = `(${symbol})`;
+            this.highlightNodeText(searchQuery, symbolNode);
 
             let linkNode = resultNode.querySelector(".search-bar-results-list-result-link");
             linkNode.href = `${this.companyPageLocalUrl}?symbol=${symbol}`

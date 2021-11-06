@@ -10,4 +10,4 @@ const searchResultsList = new SearchResultsList(resultsListNode);
 const activeStocksMarquee = new ActiveStocksMarquee(marqueeNode);
 activeStocksMarquee.load();
 
-searchBar.onSearch((companies) => searchResultsList.renderResults(companies))
+searchBar.onSearch((searchQuery, companies) => searchResultsList.renderResults(searchQuery, companies))
