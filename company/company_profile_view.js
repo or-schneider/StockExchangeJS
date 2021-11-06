@@ -1,12 +1,8 @@
-import * as companyGraph from "./company_profile_chart.js";
-import { fetchCompanyDataAsync,fetchHistoricalPriceAsync } from "./company_profile.js";
 import {update as updatePriceChangesNode} from "../price_changes/price_changes_updater.js"
 
-const urlSearchParams = new URLSearchParams(window.location.search);
-const params = Object.fromEntries(urlSearchParams.entries());
 
 
-class CompanyProfile{
+export class CompanyProfileView{
     constructor(containerNode,symbol){
         this.symbol = symbol;
         this.containerNode = containerNode;
@@ -26,35 +22,25 @@ class CompanyProfile{
         this.contentContainerNode.classList.add("d-none");
         this.loaderNode.classList.add("d-none");
     }
-    async load(){
-        this.loaderNode.classList.remove("d-none");
-        let companyData = await fetchCompanyDataAsync(params.symbol);
-        this.updateProfileView(companyData.profile);
-        
-
+    hide(){
+        this.contentContainerNode.classList.add("d-none");
+    }
+    show(){
         this.contentContainerNode.classList.remove("d-none");
-        this.loaderNode.classList.add("d-none");
-
     }
-    updateProfileView(profileData){
-        this.imageNode.src = profileData.image;
-        this.nameNode.textContent = profileData.companyName;
-        this.stockPriceNode.textContent = profileData.price;
-        updatePriceChangesNode(this.stockPriceChangesNode, profileData.changesPercentage)
-        this.descriptionNode.textContent = profileData.description;
-        this.linkNode.href = profileData.website;
+    updateProfileView(companyData){
+        this.imageNode.src = companyData.profile.image;
+        this.nameNode.textContent = companyData.profile.companyName;
+        this.stockPriceNode.textContent = companyData.profile.price;
+        updatePriceChangesNode(this.stockPriceChangesNode, companyData.profile.changesPercentage)
+        this.descriptionNode.textContent = companyData.profile.description;
+        this.linkNode.href = companyData.profile.website;
     }
-    async addChart(){
-        loaderNode.classList.remove("d-none");
-
-        let historicalPriceData = await fetchHistoricalPriceAsync(params.symbol);
-
-        companyGraph.updateGraph(historicalPriceData);
-
+    hideLoader(){
         this.loaderNode.classList.add("d-none");
     }
+    showLoader(){
+        this.loaderNode.classList.remove("d-none");
+    }
+    
 }
-
-const companyProfile = new CompanyProfile(contentContainerNode , params.symbol);
-await companyProfile.load();
-await companyProfile.addChart();

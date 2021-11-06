@@ -1,19 +1,41 @@
-import {fetchAsync} from "../scripts/fetch_async.js";
+import {fetchCompanyDataAsync,fetchHistoricalPriceAsync} from "./company_profile_api.js";
+import {CompanyProfileView} from "./company_profile_view.js";
+import * as companyGraph from "./company_profile_chart.js";
 
-const historicalPriceApiUrl = `${STOCK_EXCHANGE_API_ROOT_URL}historical-price-full/`
+class CompanyProfile{
+    constructor(containerNode,symbol){
+        this.symbol = symbol;
+        this.containerNode = containerNode;
+        this.view = new CompanyProfileView(containerNode , this.symbol);
 
-export async function fetchCompanyDataAsync(symbol){
-    const url = `${STOCK_EXCHANGE_API_COMPANY_PROFILE_URL}${symbol}`
-    let data = await fetchAsync(url);
-    
-    return data;
+        this.view.hideLoader();
+        this.view.hide();
+    }
+    async load(){
+        this.view.showLoader();
+
+        let companyData = await fetchCompanyDataAsync(this.symbol);
+
+        this.view.updateProfileView(companyData)
+        this.view.show();
+        this.view.hideLoader();
+    }
+    async addChart(){
+        this.view.showLoader();
+
+        let historicalPriceData = await fetchHistoricalPriceAsync(this.symbol);
+
+        companyGraph.updateGraph(historicalPriceData);
+
+        this.view.hideLoader();
+
+    }
 }
-export async function fetchHistoricalPriceAsync(symbol){
-    const url = `${historicalPriceApiUrl}${symbol}?serietype=line`
+const companyProfileNode = document.getElementById("companyProfile");
 
-    let data = await fetchAsync(url);
-    
-    return data;
-}
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
 
-
+const companyProfile = new CompanyProfile(companyProfileNode , params.symbol);
+await companyProfile.load();
+await companyProfile.addChart();

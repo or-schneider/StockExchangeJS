@@ -1,5 +1,5 @@
 import {fetchAsync} from "../scripts/fetch_async.js";
-import {fetchCompanyDataAsync} from "../company/company_profile.js";
+import {fetchCompanyDataAsync} from "../company/company_profile_api.js";
 
 export class SearchBar{
     searchBarNode;
