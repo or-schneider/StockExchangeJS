@@ -1,6 +1,7 @@
 import {update as updatePriceChangesNode} from "../price_changes/price_changes_updater.js"
 
 export class SearchResultsList{
+    compareButtonsToCompanies = new Map();
     resultsTotal = 10;
     constructor(resultsListContainerNode){
         this.resultListContainerNode = resultsListContainerNode;
@@ -57,6 +58,14 @@ export class SearchResultsList{
             priceChangesNode.classList.add("price-changes");
             textAsideContainerNode.appendChild(priceChangesNode);
             
+            const compareButtonNode = document.createElement("button");
+            compareButtonNode.classList.add("button");
+            compareButtonNode.classList.add("search-bar-results-list-result-compare-button");
+            compareButtonNode.type="submit";
+            compareButtonNode.textContent = "Compare";
+            compareButtonNode.addEventListener('click', this.compareButtonClick.bind(this))
+            resultNode.appendChild(compareButtonNode);
+
             resultNodes.push(resultNode);
             resultsListNode.appendChild(resultNode);    
 
@@ -112,7 +121,7 @@ export class SearchResultsList{
         return foundSequences;
     }
     highlightNodeText(queryToHighlight,targetNode){
-        
+
         queryToHighlight = queryToHighlight.toLowerCase();
         const text = targetNode.textContent;
 
@@ -162,14 +171,24 @@ export class SearchResultsList{
 
             let linkNode = resultNode.querySelector(".search-bar-results-list-result-link");
             linkNode.href = `${this.companyPageLocalUrl}?symbol=${symbol}`
+            linkNode.title = profile.companyName;
             let priceChangesNode = resultNode.querySelector(".search-bar-results-list-result-price-changes");
             updatePriceChangesNode(priceChangesNode,profile.changesPercentage);
             
             let imageNode = resultNode.querySelector(".search-bar-results-list-result-image");
             imageNode.src = profile.image;
             
-
+            let compareButtonNode = resultNode.querySelector(".search-bar-results-list-result-compare-button");
+            this.compareButtonsToCompanies.set(compareButtonNode, companyProfiles[i]);
         }
         this.hideResults(endIndex);
+    }
+    compareButtonClick(event){
+        const company = this.compareButtonsToCompanies.get(event.target);
+        this.addToCompanyComparison(company)
+
+    }
+    addToCompanyComparison(company){
+        console.log(company)
     }
 }

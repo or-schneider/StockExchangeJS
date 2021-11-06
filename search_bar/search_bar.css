@@ -10,6 +10,7 @@
   align-items: center;
   position: relative;
   flex-grow: 1;
+  min-width: 0;
 }
 .input-box-loader {
   position: absolute;
@@ -39,17 +40,17 @@
 .search-bar-input-button {
   background-color: rgb(50, 132, 255);
   border: none;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  white-space: nowrap;
   /* border: solid rgba(0, 0, 0, 0.726) 1px; */
-  padding: 8px 16px;
+  padding: 8px 14px;
   color: rgb(244, 244, 250);
 }
 .search-bar-results-list {
   padding-top: 4px;
 }
 .search-bar-results-list-result {
-  padding: 4px 0px;
-  padding-left: 16px;
+  padding: 4px 20px;
   color: blue;
 
   display: flex;
@@ -64,9 +65,16 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
+  overflow: hidden;
+}
+.search-bar-results-list-result-link {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .search-bar-results-list-result-company-name {
-  font-size: 1.3rem;
+  white-space: nowrap;
+  font-size: 1.1rem;
+  /* overflow: hidden; */
 }
 .search-bar-results-list-result-text-aside-container {
   display: flex;
@@ -90,6 +98,14 @@
 .search-bar-results-list-result-symbol,
 .search-bar-results-list-result-price-changes {
   font-size: 0.85rem;
+}
+.search-bar-results-list-result-compare-button {
+  margin-left: auto;
+  background-color: rgb(6, 143, 159);
+  border: none;
+  font-size: 1rem;
+  padding: 6px 8px;
+  color: rgb(244, 244, 250);
 }
 .search-bar-results-loader {
   display: flex;

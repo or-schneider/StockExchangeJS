@@ -1,5 +1,6 @@
 export function update(PriceChangesNode, changesPercentage){
-    PriceChangesNode.textContent = changesPercentage;
+    changesPercentage = parseFloat(changesPercentage);
+    PriceChangesNode.textContent = changesPercentage.toFixed(2);
     if(changesPercentage>=0){
         PriceChangesNode.classList.add("price-changes-positive")
         PriceChangesNode.classList.remove("price-changes-negative")

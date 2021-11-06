@@ -60,19 +60,23 @@ export class SearchBar{
     }
     async search(searchQuery){
         this.resultsLoaderNode.classList.remove("d-none");
-        
-        let results = await this.fetchResults(searchQuery);
-
-        let companyProfiles = [];
-        for (const result of results) {
-            let companyProfile = await fetchCompanyDataAsync(result.symbol);
-            companyProfiles.push(companyProfile);
+        try {
+            let results = await this.fetchResults(searchQuery);
+            
+            let companyProfiles = [];
+            for (const result of results) {
+                let companyProfile = await fetchCompanyDataAsync(result.symbol);
+                companyProfiles.push(companyProfile);
+            }
+            for (const listener of this.onSearchListeners) {
+                listener(searchQuery, companyProfiles);
+            }
+        } catch (error) {
+            console.log(error);
         }
-        for (const listener of this.onSearchListeners) {
-            listener(searchQuery, companyProfiles);
+        finally{
+            this.resultsLoaderNode.classList.add("d-none");
         }
-
-        this.resultsLoaderNode.classList.add("d-none");
     }
     async fetchResults(searchTarget){
         const url = `${STOCK_EXCHANGE_API_ROOT_URL}search?query=${searchTarget}&limit=10&exchange=NASDAQ`
