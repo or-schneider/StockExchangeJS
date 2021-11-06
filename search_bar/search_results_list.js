@@ -23,10 +23,14 @@ export class SearchResultsList{
             const resultNode = document.createElement("li");
             resultNode.classList.add("search-bar-results-list-result");
 
+            const imageContainerNode = document.createElement("div");
+            imageContainerNode.classList.add("search-bar-results-list-result-image-container");
+            resultNode.appendChild(imageContainerNode)
+
             const imageNode = document.createElement("img");
             imageNode.classList.add("search-bar-results-list-result-image");
             imageNode.alt="logo";
-            resultNode.appendChild(imageNode)
+            imageContainerNode.appendChild(imageNode)
             
             const textContainerNode = document.createElement("div");
             textContainerNode.classList.add("search-bar-results-list-result-text-container");

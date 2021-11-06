@@ -34,6 +34,7 @@ export class SearchBar{
         
         this.inputNode = document.createElement("input");
         this.inputNode.classList.add("search-bar-input");
+        this.inputNode.placeholder = "Search for company stock symbol"
         inputBoxNode.appendChild(this.inputNode);
         
         this.resultsLoaderNode = document.createElement("div");
@@ -46,7 +47,7 @@ export class SearchBar{
         this.inputButtonNode.classList.add("button");
         this.inputButtonNode.classList.add("search-bar-input-button");
         this.inputButtonNode.type = "submit";
-        this.inputButtonNode.textContent = "Search";
+        this.inputButtonNode.value = "Search";
         searchBarForm.appendChild(this.inputButtonNode);
         
     }
