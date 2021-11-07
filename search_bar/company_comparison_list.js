@@ -1,7 +1,7 @@
 export class CompanyComparisonList{
     cancelButtonNodes = []
     targetsSet = new Set();
-    maxTargets = 5;
+    maxTargets = 3;
     constructor(nodeContainer){
         this.nodeContainer = nodeContainer;
         this.init();
@@ -13,9 +13,30 @@ export class CompanyComparisonList{
         this.disableCompareLink();
     }
     disableCompareLink(){
-        this.compareLinkNode.href='#'
-        this.compareLinkNode.textContent = "compare"
-        this.compareLinkNode.classList.add("company-comparison-list-compare-link-disable");
+        this.updateCompareLink("compare",'#',false);
+    }
+    updateCompareLink(text,link,isEnabled){
+        if(isEnabled)
+            this.compareLinkNode.classList.remove("company-comparison-list-compare-link-disable");
+        else
+            this.compareLinkNode.classList.add("company-comparison-list-compare-link-disable");
+
+        this.compareLinkNode.textContent = text;
+        this.compareLinkNode.href = link;
+    }
+    refreshCompareLink(){
+        if(this.targetsSet.size==0){
+            this.disableCompareLink();
+            return;
+        }
+        let text = `compare ${this.targetsSet.size} `;
+        if(this.targetsSet.size==1)
+            text+="company"
+        else
+            text+="companies"
+
+        let link ="Blank"
+        this.updateCompareLink(text, link , true)
     }
     generate(){
         this.contentContainerNode = document.createElement('div');
@@ -51,13 +72,18 @@ export class CompanyComparisonList{
         cancelButtonNode.addEventListener('click',()=>{
             this.targetsSet.delete(companyData);
             cancelButtonNode.remove();
+            this.refreshCompareLink();
+
         })
+
+        this.refreshCompareLink();
     }
     clear(){
         for (let i = cancelButtonNodes.length-1; i >= 0; i--) {
             cancelButtonNodes[i].remove();
             const cancelButtonNode = cancelButtonNodes.pop();
             cancelButtonNode.remove();
+            this.refreshCompareLink();
         }
     }
 }
