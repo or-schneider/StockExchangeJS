@@ -15,6 +15,7 @@ export class CompanyProfileView{
         this.loaderNodeContainer.classList.add("d-none");
     }
     generate(){
+        this.containerNode.classList.add("main-body-container");
 
         this.loaderNodeContainer = document.createElement("div");
         this.loaderNodeContainer.classList.add("company-profile-loader-container");
@@ -82,8 +83,9 @@ export class CompanyProfileView{
     }
     addChart(chartConfigData){
         this.chartNode = document.createElement('canvas');
-        this.chartNode.width = 400;
-        this.chartNode.height = 150;
+
+        window.addEventListener('resize', this.refreshChart.bind(this), false);
+
         this.contentContainerNode.appendChild(this.chartNode);
 
         const chartNodeContext = this.chartNode.getContext('2d');
@@ -95,5 +97,17 @@ export class CompanyProfileView{
     showLoader(){
         this.loaderNodeContainer.classList.remove("d-none");
     }
-    
+    async refreshChart(){
+        let originalDisplay = this.chartNode.style.display;
+        this.chartNode.style.display="none";
+        this.chartNode.getContext("2d").width = "100%";
+        this.chartNode.getContext("2d").height = 300;
+
+        await this.timeout(0);
+        this.chartNode.style.display = originalDisplay;
+
+    }
+    timeout(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }

@@ -10,6 +10,8 @@
   display: flex;
   flex-direction: column;
   gap: 26px;
+  width: fit-content;
+  flex: 1 1 0;
 }
 .company-profile-loader-container {
   display: flex;
