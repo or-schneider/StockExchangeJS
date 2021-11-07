@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+
+    <title>Stocks Exchange</title>
+
+    <link rel="stylesheet" href="../styles/reset.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../price_changes/price_changes.css" />
+    <link rel="stylesheet" href="../company_profile/company_profile.css" />
+    <link rel="stylesheet" href="../loader/loader.css" />
+    <link rel="stylesheet" href="./compare_page.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="compare-page-container">
+        <h1 class="compare-page-title">Compare Stocks:</h1>
+        <div id="companyProfileComparison"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+    <script src="../scripts/constants.js"></script>
+    <script type="module" src="./compare_page.js"></script>
+  </body>
+</html>
