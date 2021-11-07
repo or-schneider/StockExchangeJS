@@ -6,7 +6,7 @@ import { CompanyComparisonList } from "../search_bar/company_comparison_list.js"
 const marqueeNode = document.getElementById("activeStocksMarquee");
 const resultsListNode = document.getElementById("searchBarResultsList");
 const searchBarNode = document.getElementById('searchBar');
-const comparisonListNode = document.getElementById('companyComparisonListNode');
+const comparisonListNode = document.getElementById('companyComparisonList');
 
 const searchBar = new SearchBar(searchBarNode);
 const searchResultsList = new SearchResultsList(resultsListNode);
@@ -16,4 +16,5 @@ const comparisonList = new CompanyComparisonList(comparisonListNode);
 activeStocksMarquee.load();
 
 searchBar.onSearch((searchQuery, companies) => searchResultsList.renderResults(searchQuery, companies))
+
 searchResultsList.onCompareClick(comparisonList.add.bind(comparisonList))

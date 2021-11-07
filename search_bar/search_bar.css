@@ -107,10 +107,35 @@
   padding: 6px 8px;
   color: rgb(244, 244, 250);
 }
+.search-bar-results-list-result-compare-button:active {
+  filter: brightness(0.9);
+}
 .search-bar-results-loader {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 26px;
   width: 100%;
+}
+.company-comparison-list-content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 34px;
+  background-color: rgba(167, 167, 167, 0.048);
+  padding-right: 24px;
+  border: rgba(0, 0, 0, 0.062) solid 1px;
+  margin-bottom: 8px;
+}
+.company-comparison-buttons {
+  display: flex;
+  gap: 4px;
+  height: inherit;
+}
+.company-comparison-list-compare-link {
+}
+.company-comparison-list-compare-link-disable {
+  pointer-events: none;
+  cursor: default;
+  color: gray;
 }
