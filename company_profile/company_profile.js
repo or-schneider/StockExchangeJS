@@ -2,7 +2,7 @@ import {fetchCompanyDataAsync,fetchHistoricalPriceAsync} from "./company_profile
 import { CompanyProfileChartConfig } from "./company_profile_chart_config.js";
 import {CompanyProfileView} from "./company_profile_view.js";
 
-class CompanyProfile{
+export class CompanyProfile{
     constructor(containerNode,symbol){
         this.symbol = symbol;
         this.containerNode = containerNode;
@@ -34,11 +34,3 @@ class CompanyProfile{
 
     }
 }
-const companyProfileNode = document.getElementById("companyProfile");
-
-const urlSearchParams = new URLSearchParams(window.location.search);
-const params = Object.fromEntries(urlSearchParams.entries());
-
-const companyProfile = new CompanyProfile(companyProfileNode , params.symbol);
-await companyProfile.load();
-await companyProfile.addChart();

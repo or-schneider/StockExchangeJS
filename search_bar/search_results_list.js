@@ -8,7 +8,7 @@ export class SearchResultsList{
         this.init();
     }
     init(){
-        this.companyPageLocalUrl = "./company/company.html";
+        this.companyPageLocalUrl = "./pages/company.html";
         const resultNodesList = this.generateResultsListNode(this.resultsTotal);
         this.resultListContainerNode.appendChild(resultNodesList);
 
