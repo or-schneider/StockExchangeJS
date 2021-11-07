@@ -2,6 +2,7 @@ import {update as updatePriceChangesNode} from "../price_changes/price_changes_u
 
 export class SearchResultsList{
     compareButtonsToCompanies = new Map();
+    onCompareListeners = []
     resultsTotal = 10;
     constructor(resultsListContainerNode){
         this.resultListContainerNode = resultsListContainerNode;
@@ -185,10 +186,15 @@ export class SearchResultsList{
     }
     compareButtonClick(event){
         const company = this.compareButtonsToCompanies.get(event.target);
-        this.addToCompanyComparison(company)
-
+        // this.addToCompanyComparison(company)
+        this.onCompareListeners.forEach(callback => {
+            callback(company);
+        });
     }
-    addToCompanyComparison(company){
-        console.log(company)
+    // addToCompanyComparison(company){
+    //     console.log(company)
+    // }
+    onCompareClick(callback){
+        this.onCompareListeners.push(callback);
     }
 }
