@@ -2,6 +2,7 @@ export class CompanyComparisonList{
     cancelButtonNodes = []
     targetsSet = new Set();
     maxTargets = 3;
+    compareUrl = "./pages/compare.html";
     constructor(nodeContainer){
         this.nodeContainer = nodeContainer;
         this.init();
@@ -35,7 +36,14 @@ export class CompanyComparisonList{
         else
             text+="companies"
 
-        let link ="Blank"
+        const targetSymbols =[];
+        this.targetsSet.forEach(target => {
+            targetSymbols.push(target.symbol);
+        });
+        const targetSymbolsString = targetSymbols.join(',');
+
+        let link =  `${this.compareUrl}?symbols=${targetSymbolsString}`;
+        
         this.updateCompareLink(text, link , true)
     }
     generate(){
