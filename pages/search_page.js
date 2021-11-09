@@ -13,6 +13,12 @@ const searchResultsList = new SearchResultsList(resultsListNode);
 const activeStocksMarquee = new ActiveStocksMarquee(marqueeNode);
 const comparisonList = new CompanyComparisonList(comparisonListNode);
 
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
+if(params.query){
+    searchBar.search(params.query);
+}
+
 searchBar.activateAutoSearch();
 
 activeStocksMarquee.load();

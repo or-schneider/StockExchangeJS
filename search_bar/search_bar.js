@@ -103,6 +103,10 @@ export class SearchBar{
             }
             if(this.lastSearchQuery!=searchQuery) //Abort search as a new search is underway
                 return;
+                
+            const searchQueryUrlParam = `?query=${searchQuery}`;
+            history.replaceState({}, "", searchQueryUrlParam);
+            
             for (const listener of this.onSearchListeners) {
                 listener(searchQuery, companyProfiles);
             }
