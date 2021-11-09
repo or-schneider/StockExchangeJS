@@ -1,12 +1,14 @@
 export class CompanyProfileChartConfig{
     config;
+    dataEntriesAmount = 20;
+    
     constructor(nodeContainer){
         this.nodeContainer = nodeContainer;
     }
     generate(historicalPriceData){
     
         let historicalData = historicalPriceData.historical;
-        let recentHistoricalData = historicalData.slice(0,100).reverse();
+        let recentHistoricalData = historicalData.slice(0,this.dataEntriesAmount).reverse();
         let labels = recentHistoricalData.map((data)=>data.date);
         let inputData = recentHistoricalData.map((data)=>data.close);
 

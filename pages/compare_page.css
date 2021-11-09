@@ -6,7 +6,7 @@
 }
 .compare-page-title {
   padding: 8px 32px;
-  background-color: white;
+  background-color: #ffffffeb;
   /* border-radius: 8px; */
   margin-bottom: 8px;
   font-family: sans-serif;
@@ -17,7 +17,7 @@
 .company-profile-comparison-container {
   display: flex;
   justify-content: space-evenly;
-  gap: max(24px, min(5%, 88px));
+  gap: max(24px, min(3%, 88px));
 
   align-items: flex-start;
 }
