@@ -2,31 +2,26 @@ import {fetchAsync} from "../scripts/fetch_async.js";
 import {fetchCompanyDataAsync} from "../company_profile/company_profile_api.js";
 
 export class SearchBar{
-    searchBarNode;
+    rootNode;
     inputButtonNode;
     inputNode = document;
     resultsLoaderNode;
 
     onSearchListeners = [];
 
-    constructor(searchBarNode){
-        this.searchBarNode = searchBarNode;
+    constructor(rootNode){
+        this.rootNode = rootNode;
         this.init();    
     }
     init(){
-        // this.inputButtonNode = document.getElementById("searchBarInputButton");
-        // this.inputNode = document.getElementById("searchBarInput");
-        // this.resultsLoaderNode = document.getElementById("searchBarResultsLoader");
-        
-        
-        this.generate(this.searchBarNode);
+        const searchBarForm = this.generate();
+        this.rootNode.appendChild(searchBarForm);
 
         this.inputButtonNode.addEventListener('click',this.submitSearch.bind(this));
     }
-    generate(searchBarNode){
+    generate(){
         let searchBarForm = document.createElement("form");
         searchBarForm.classList.add("search-bar-input-container");
-        searchBarNode.appendChild(searchBarForm);
 
         const inputBoxNode = document.createElement("div");
         inputBoxNode.classList.add("input-box");
@@ -50,6 +45,7 @@ export class SearchBar{
         this.inputButtonNode.value = "Search";
         searchBarForm.appendChild(this.inputButtonNode);
         
+        return searchBarForm;
     }
     onSearch(listener){
         this.onSearchListeners.push(listener);

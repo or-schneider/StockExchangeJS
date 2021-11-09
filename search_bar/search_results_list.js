@@ -4,14 +4,14 @@ export class SearchResultsList{
     compareButtonsToCompanies = new Map();
     onCompareListeners = []
     resultsTotal = 10;
-    constructor(resultsListContainerNode){
-        this.resultListContainerNode = resultsListContainerNode;
+    constructor(rootNode){
+        this.rootNode = rootNode;
         this.init();
     }
     init(){
         this.companyPageLocalUrl = "./pages/company.html";
         const resultNodesList = this.generateResultsListNode(this.resultsTotal);
-        this.resultListContainerNode.appendChild(resultNodesList);
+        this.rootNode.appendChild(resultNodesList);
 
         this.hideResults(0);
     }
@@ -80,11 +80,11 @@ export class SearchResultsList{
             resultNode.classList.add("d-none");
         }
         if(startIndex==0)
-            this.resultListContainerNode.classList.add("d-none");
+            this.rootNode.classList.add("d-none");
     }
     showResults(endIndex){
         if(endIndex>0)
-            this.resultListContainerNode.classList.remove("d-none");
+            this.rootNode.classList.remove("d-none");
         for (let i = 0; i < endIndex; i++) {
             const resultNode = this.resultNodes[i];
             resultNode.classList.remove("d-none");

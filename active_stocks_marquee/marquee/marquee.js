@@ -1,12 +1,14 @@
 export class Marquee{
-    containerNode;
     elementWidthPercentage = '7%';
     
-    constructor(containerNode,nodeItems,elementWidthPercentage){
+    constructor(rootNode,nodeItems,elementWidthPercentage){
         this.elementWidthPercentage = elementWidthPercentage;
-        this.createMarquee(containerNode, nodeItems)
+        this.rootNode = rootNode;
+        
+        const marqueeNode = this.generate(nodeItems)
+        rootNode.appendChild(marqueeNode)
     }
-    createMarquee(containerNode, nodeItems){
+    generate(nodeItems){
     
         const marqueeNode = document.createElement("div");
         marqueeNode.classList.add("marquee");
@@ -23,8 +25,7 @@ export class Marquee{
         sliderFollowNode.classList.add("marquee-slider-follow");
         
         marqueeNode.appendChild(sliderFollowNode);
-
-        containerNode.appendChild(marqueeNode)
+        return marqueeNode;
     }
     generateMarqueeSlider(itemNodes){
         const sliderNode = document.createElement("div");

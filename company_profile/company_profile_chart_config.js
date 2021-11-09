@@ -1,9 +1,8 @@
 export class CompanyProfileChartConfig{
     config;
     dataEntriesAmount = 20;
-    
-    constructor(nodeContainer){
-        this.nodeContainer = nodeContainer;
+
+    constructor(){
     }
     generate(historicalPriceData){
     

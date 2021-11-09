@@ -2,19 +2,21 @@ import {update as updatePriceChangesNode} from "../price_changes/price_changes_u
 
 export class CompanyProfileView{
     
-    constructor(containerNode,symbol){
+    constructor(rootNode,symbol){
         this.symbol = symbol;
-        this.containerNode = containerNode;
+        this.rootNode = rootNode;
 
         this.init();
     }
     init(){
-        this.generate();
+        const containerNode = this.generate();
+        this.rootNode.appendChild(containerNode);
 
         this.contentContainerNode.classList.add("d-none");
         this.loaderNodeContainer.classList.add("d-none");
     }
     generate(){
+        this.containerNode = document.createElement("div");
         this.containerNode.classList.add("main-body-container");
 
         this.loaderNodeContainer = document.createElement("div");
@@ -66,6 +68,8 @@ export class CompanyProfileView{
         this.descriptionNode = document.createElement("p");
         // this.descriptionNode.classList.add("");
         this.contentContainerNode.appendChild(this.descriptionNode);
+
+        return this.containerNode;
     }
     hide(){
         this.contentContainerNode.classList.add("d-none");

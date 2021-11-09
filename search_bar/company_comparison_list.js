@@ -3,13 +3,13 @@ export class CompanyComparisonList{
     targetsSet = new Set();
     maxTargets = 3;
     compareUrl = "./pages/compare.html";
-    constructor(nodeContainer){
-        this.nodeContainer = nodeContainer;
+    constructor(rootNode){
+        this.rootNode = rootNode;
         this.init();
     }
     init(){
         const contentContainerNode = this.generate();
-        this.nodeContainer.appendChild(contentContainerNode);
+        this.rootNode.appendChild(contentContainerNode);
 
         this.disableCompareLink();
     }
@@ -43,7 +43,7 @@ export class CompanyComparisonList{
         const targetSymbolsString = targetSymbols.join(',');
 
         let link =  `${this.compareUrl}?symbols=${targetSymbolsString}`;
-        
+
         this.updateCompareLink(text, link , true)
     }
     generate(){

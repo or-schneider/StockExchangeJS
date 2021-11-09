@@ -3,10 +3,10 @@ import { CompanyProfileChartConfig } from "./company_profile_chart_config.js";
 import {CompanyProfileView} from "./company_profile_view.js";
 
 export class CompanyProfile{
-    constructor(containerNode,symbol){
+    constructor(rootNode,symbol){
         this.symbol = symbol;
-        this.containerNode = containerNode;
-        this.view = new CompanyProfileView(containerNode , this.symbol);
+        this.rootNode = rootNode;
+        this.view = new CompanyProfileView(rootNode , this.symbol);
         this.chartConfig = new CompanyProfileChartConfig();
 
         this.view.hideLoader();

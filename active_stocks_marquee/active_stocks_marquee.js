@@ -1,25 +1,25 @@
 import { fetchAsync } from "../scripts/fetch_async.js";
 import {Marquee} from "./marquee/marquee.js"
 export class ActiveStocksMarquee{
-    nodeContainer;
+    rootNode;
     marqueeComponent;
 
-    marqueeElementWidth = '8%';
+    marqueeElementWidth = '80px';
     totalStocksToDisplay = 160;
     activeStocksUrl = `${STOCK_EXCHANGE_API_ROOT_URL}actives`;
 
-    constructor(nodeContainer){
-        this.nodeContainer = nodeContainer;
+    constructor(rootNode){
+        this.rootNode = rootNode;
     }
     async load(){
         if(this.marqueeComponent)
-            this.nodeContainer.removeChild(this.nodeContainer.firstChild);
+            this.rootNode.removeChild(this.rootNode.firstChild);
 
         let activeStocksData = await fetchAsync(this.activeStocksUrl)
         activeStocksData.splice(this.totalStocksToDisplay);
         
         let activeStocksNodes = this.generateActiveStocksNodes(activeStocksData);
-        this.marqueeComponent = new Marquee(this.nodeContainer, activeStocksNodes, this.marqueeElementWidth);
+        this.marqueeComponent = new Marquee(this.rootNode, activeStocksNodes, this.marqueeElementWidth);
     }
     generateActiveStocksNodes(activeStocksData){
         const activeStocksNodes = activeStocksData.map((activeStockData)=>{
