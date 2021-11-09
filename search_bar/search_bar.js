@@ -1,5 +1,5 @@
 import {fetchAsync} from "../scripts/fetch_async.js";
-import {fetchCompanyDataAsync} from "../company_profile/company_profile_api.js";
+import {fetchCompaniesDataAsync} from "../company_profile/company_profile_api.js";
 
 export class SearchBar{
     rootNode;
@@ -95,15 +95,12 @@ export class SearchBar{
         this.resultsLoaderNode.classList.remove("d-none");
         try {
             let results = await this.fetchResults(searchQuery);
-            
-            let companyProfiles = [];
-            for (const result of results) {
-                let companyProfile = await fetchCompanyDataAsync(result.symbol);
-                companyProfiles.push(companyProfile);
-            }
+            const symbols = results.map((result)=>result.symbol);
+            let companyProfiles = await fetchCompaniesDataAsync(symbols)
+
             if(this.lastSearchQuery!=searchQuery) //Abort search as a new search is underway
                 return;
-                
+
             const searchQueryUrlParam = `?query=${searchQuery}`;
             history.replaceState({}, "", searchQueryUrlParam);
             
