@@ -13,6 +13,8 @@ const searchResultsList = new SearchResultsList(resultsListNode);
 const activeStocksMarquee = new ActiveStocksMarquee(marqueeNode);
 const comparisonList = new CompanyComparisonList(comparisonListNode);
 
+searchBar.activateAutoSearch();
+
 activeStocksMarquee.load();
 
 searchBar.onSearch((searchQuery, companies) => searchResultsList.renderResults(searchQuery, companies))

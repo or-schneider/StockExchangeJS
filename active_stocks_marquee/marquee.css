@@ -2,8 +2,11 @@
 .active-stocks-marquee-symbol {
   font-size: 0.8rem;
 }
-.active-stocks-marquee-price {
-  color: rgb(32, 218, 32);
+.active-stocks-marquee-price-positive {
+  color: rgb(40, 207, 40);
+}
+.active-stocks-marquee-price-negative {
+  color: red;
 }
 .active-stocks-marquee-price::before {
   content: "$";

@@ -32,7 +32,11 @@ export class ActiveStocksMarquee{
             const priceNode = document.createElement("div");
             priceNode.textContent = activeStockData.price;
             priceNode.classList.add("active-stocks-marquee-price");
-            
+            if(activeStockData.changesPercentage>=0)
+                priceNode.classList.add("active-stocks-marquee-price-positive");
+            else
+                priceNode.classList.add("active-stocks-marquee-price-negative");
+
             activeStockNode.appendChild(priceNode);
 
             return activeStockNode;

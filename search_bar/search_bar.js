@@ -4,11 +4,12 @@ import {fetchCompanyDataAsync} from "../company_profile/company_profile_api.js";
 export class SearchBar{
     rootNode;
     inputButtonNode;
-    inputNode = document;
     resultsLoaderNode;
 
     onSearchListeners = [];
-
+    lastSearchQuery = ""
+    autoSearchDelayDuration = 400;
+    autoSearchCooldownTimeout = undefined;
     constructor(rootNode){
         this.rootNode = rootNode;
         this.init();    
@@ -18,6 +19,8 @@ export class SearchBar{
         this.rootNode.appendChild(searchBarForm);
 
         this.inputButtonNode.addEventListener('click',this.submitSearch.bind(this));
+
+        this.autoSearch = this.autoSearch.bind(this);
     }
     generate(){
         let searchBarForm = document.createElement("form");
@@ -47,14 +50,48 @@ export class SearchBar{
         
         return searchBarForm;
     }
+    activateAutoSearch(){
+        this.inputNode.addEventListener('input',this.autoSearch)
+    }
+    deactivateAutoSearch(){
+        this.inputNode.removeEventListener('input',this.autoSearch)
+    }
+    abortAutoSearchInProgress(){
+        if(this.autoSearchCooldownTimeout){
+            window.clearTimeout(this.autoSearchCooldownTimeout);
+            this.autoSearchCooldownTimeout = undefined
+        }
+    }
+    autoSearch(){
+        const inputValue = this.inputNode.value;
+
+        this.abortAutoSearchInProgress();
+
+        this.autoSearchCooldownTimeout = setTimeout(() => {
+
+            this.abortAutoSearchInProgress();
+
+            if(inputValue== "")
+                return;
+            if(inputValue == this.lastSearchQuery)
+                return;
+
+            // console.log(inputValue);
+            this.search(inputValue);
+
+        }, this.autoSearchDelayDuration);
+    }
     onSearch(listener){
         this.onSearchListeners.push(listener);
     }
     submitSearch(event){
         event.preventDefault();
-        this.search(this.inputNode.value);   
+        this.abortAutoSearchInProgress();
+
+        this.search(this.inputNode.value);
     }
     async search(searchQuery){
+        this.lastSearchQuery = searchQuery;
         this.resultsLoaderNode.classList.remove("d-none");
         try {
             let results = await this.fetchResults(searchQuery);
@@ -64,6 +101,8 @@ export class SearchBar{
                 let companyProfile = await fetchCompanyDataAsync(result.symbol);
                 companyProfiles.push(companyProfile);
             }
+            if(this.lastSearchQuery!=searchQuery) //Abort search as a new search is underway
+                return;
             for (const listener of this.onSearchListeners) {
                 listener(searchQuery, companyProfiles);
             }
