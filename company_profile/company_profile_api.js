@@ -33,10 +33,10 @@ export async function fetchCompaniesDataAsync(symbols){
     const values = await Promise.all(promises);
 
     for (const data of values) {
-       if("profile" in data){
+    if ("error" in data) break;
+    if ("profile" in data) {
             companiesData.push(data);
-       }
-       else{
+    } else {
             const dataCompanyProfiles = data.companyProfiles;
             companiesData.push(...dataCompanyProfiles);
        }
@@ -53,9 +53,11 @@ function convertSymbolsToChunks(chunkSize, symbols){
         }
         symbolsChunks.push(symbolsChunk);
     }
-    
-    const leftOverStartIndex = Math.max(chunkSize, symbols.length) - (Math.max(chunkSize, symbols.length)%Math.min(chunkSize, symbols.length));
 
+  let leftOverStartIndex = Math.max(chunkSize, symbols.length) - (Math.max(chunkSize, symbols.length)%Math.min(chunkSize, symbols.length));
+  if (symbols.length <= chunkSize) {
+    leftOverStartIndex = 0;
+  }
     const symbolsChunk = [];
     for (let i = leftOverStartIndex; i < symbols.length; i++) {
             symbolsChunk.push(symbols[i]);
