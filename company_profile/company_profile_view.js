@@ -1,117 +1,124 @@
-import {update as updatePriceChangesNode} from "../price_changes/price_changes_updater.js"
+import { update as updatePriceChangesNode } from "../price_changes/price_changes_updater.js";
 
-export class CompanyProfileView{
-    
-    constructor(rootNode,symbol){
-        this.symbol = symbol;
-        this.rootNode = rootNode;
+export class CompanyProfileView {
+  constructor(rootNode, symbol) {
+    this.symbol = symbol;
+    this.rootNode = rootNode;
 
-        this.init();
-    }
-    init(){
-        const containerNode = this.generate();
-        this.rootNode.appendChild(containerNode);
+    this.init();
+  }
+  init() {
+    const containerNode = this.generate();
+    this.rootNode.appendChild(containerNode);
 
-        this.contentContainerNode.classList.add("d-none");
-        this.loaderNodeContainer.classList.add("d-none");
-    }
-    generate(){
-        this.containerNode = document.createElement("div");
-        this.containerNode.classList.add("main-body-container");
+    this.contentContainerNode.classList.add("d-none");
+    this.loaderNodeContainer.classList.add("d-none");
+  }
+  generate() {
+    this.containerNode = document.createElement("div");
+    this.containerNode.classList.add("main-body-container");
 
-        this.loaderNodeContainer = document.createElement("div");
-        this.loaderNodeContainer.classList.add("company-profile-loader-container");
-        this.containerNode.appendChild(this.loaderNodeContainer);
+    this.loaderNodeContainer = document.createElement("div");
+    this.loaderNodeContainer.classList.add("company-profile-loader-container");
+    this.containerNode.appendChild(this.loaderNodeContainer);
 
-        this.loaderNode = document.createElement("div");
-        this.loaderNode.classList.add("lds-dual-ring");
-        this.loaderNodeContainer.appendChild(this.loaderNode);
+    this.loaderNode = document.createElement("div");
+    this.loaderNode.classList.add("lds-dual-ring");
+    this.loaderNodeContainer.appendChild(this.loaderNode);
 
-        this.contentContainerNode = document.createElement("div");
-        this.contentContainerNode.classList.add("company-profile-content-container");
-        this.containerNode.appendChild(this.contentContainerNode);
-        
-        this.headerNode = document.createElement("div");
-        this.headerNode.classList.add("company-profile-header");
-        this.contentContainerNode.appendChild(this.headerNode);
+    this.contentContainerNode = document.createElement("div");
+    this.contentContainerNode.classList.add(
+      "company-profile-content-container"
+    );
+    this.containerNode.appendChild(this.contentContainerNode);
 
-        this.imageNode = document.createElement("img");
-        this.imageNode.classList.add("company-profile-image");
-        this.headerNode.appendChild(this.imageNode);
-        
-        this.linkNode = document.createElement("a");
-        this.linkNode.classList.add("company-profile-header-link");
-        this.headerNode.appendChild(this.linkNode);
+    this.headerNode = document.createElement("div");
+    this.headerNode.classList.add("company-profile-header");
+    this.contentContainerNode.appendChild(this.headerNode);
 
-        this.nameNode = document.createElement("h2");
-        this.nameNode.classList.add("company-profile-name");
-        this.linkNode.appendChild(this.nameNode);
+    this.imageNode = document.createElement("img");
+    this.imageNode.classList.add("company-profile-image");
+    this.headerNode.appendChild(this.imageNode);
 
-        this.stockPricesContainerNode = document.createElement("div");
-        this.stockPricesContainerNode.classList.add("company-profile-prices-container");
-        this.contentContainerNode.appendChild(this.stockPricesContainerNode);
+    this.linkNode = document.createElement("a");
+    this.linkNode.classList.add("company-profile-header-link");
+    this.headerNode.appendChild(this.linkNode);
 
-        this.stockPriceLabelNode = document.createElement("p");
-        this.stockPriceLabelNode.classList.add("company-profile-stock-price-label");
-        this.stockPriceLabelNode.textContent = "Stock price:"
-        this.stockPricesContainerNode.appendChild(this.stockPriceLabelNode);
+    this.nameNode = document.createElement("h2");
+    this.nameNode.classList.add("company-profile-name");
+    this.linkNode.appendChild(this.nameNode);
 
-        this.stockPriceNode = document.createElement("p");
-        this.stockPriceNode.classList.add("company-profile-stock-price");
-        this.stockPricesContainerNode.appendChild(this.stockPriceNode);
+    this.stockPricesContainerNode = document.createElement("div");
+    this.stockPricesContainerNode.classList.add(
+      "company-profile-prices-container"
+    );
+    this.contentContainerNode.appendChild(this.stockPricesContainerNode);
 
-        this.stockPriceChangesNode = document.createElement("p");
-        this.stockPriceChangesNode.classList.add("company-profile-stock-price-changes");
-        this.stockPriceChangesNode.classList.add("price-changes");
-        this.stockPricesContainerNode.appendChild(this.stockPriceChangesNode);
+    this.stockPriceLabelNode = document.createElement("p");
+    this.stockPriceLabelNode.classList.add("company-profile-stock-price-label");
+    this.stockPriceLabelNode.textContent = "Stock price:";
+    this.stockPricesContainerNode.appendChild(this.stockPriceLabelNode);
 
-        this.descriptionNode = document.createElement("p");
-        // this.descriptionNode.classList.add("");
-        this.contentContainerNode.appendChild(this.descriptionNode);
+    this.stockPriceNode = document.createElement("p");
+    this.stockPriceNode.classList.add("company-profile-stock-price");
+    this.stockPricesContainerNode.appendChild(this.stockPriceNode);
 
-        return this.containerNode;
-    }
-    hide(){
-        this.contentContainerNode.classList.add("d-none");
-    }
-    show(){
-        this.contentContainerNode.classList.remove("d-none");
-    }
-    updateProfileView(companyData){
-        this.imageNode.src = companyData.profile.image;
-        this.nameNode.textContent = companyData.profile.companyName;
-        this.stockPriceNode.textContent = companyData.profile.price;
-        updatePriceChangesNode(this.stockPriceChangesNode, companyData.profile.changesPercentage)
-        this.descriptionNode.textContent = companyData.profile.description;
-        this.linkNode.href = companyData.profile.website;
-    }
-    addChart(chartConfigData){
-        this.chartNode = document.createElement('canvas');
+    this.stockPriceChangesNode = document.createElement("p");
+    this.stockPriceChangesNode.classList.add(
+      "company-profile-stock-price-changes"
+    );
+    this.stockPriceChangesNode.classList.add("price-changes");
+    this.stockPricesContainerNode.appendChild(this.stockPriceChangesNode);
 
-        window.addEventListener('resize', this.refreshChart.bind(this), false);
+    this.descriptionNode = document.createElement("p");
+    // this.descriptionNode.classList.add("");
+    this.contentContainerNode.appendChild(this.descriptionNode);
 
-        this.contentContainerNode.appendChild(this.chartNode);
+    return this.containerNode;
+  }
+  hide() {
+    this.contentContainerNode.classList.add("d-none");
+  }
+  show() {
+    this.contentContainerNode.classList.remove("d-none");
+  }
+  updateProfileView(companyData) {
+    this.imageNode.src = companyData.profile.image;
+    this.nameNode.textContent = companyData.profile.companyName;
+    this.stockPriceNode.textContent = companyData.profile.price;
+    updatePriceChangesNode(
+      this.stockPriceChangesNode,
+      companyData.profile.changesPercentage
+    );
+    this.descriptionNode.textContent = companyData.profile.description;
+    this.linkNode.href = companyData.profile.website;
+  }
+  addChart(chartConfigData) {
+    this.chartNode = document.createElement("canvas");
 
-        const chartNodeContext = this.chartNode.getContext('2d');
-        this.Chart = new Chart(chartNodeContext, chartConfigData);
-    }
-    hideLoader(){
-        this.loaderNodeContainer.classList.add("d-none");
-    }
-    showLoader(){
-        this.loaderNodeContainer.classList.remove("d-none");
-    }
-    async refreshChart(){
-        let originalDisplay = this.chartNode.style.display;
-        this.chartNode.style.display="none";
-        this.chartNode.getContext("2d").width = "100%";
-        this.chartNode.getContext("2d").height = 300;
+    window.addEventListener("resize", this.refreshChart.bind(this), false);
 
-        await this.timeout(0);
-        this.chartNode.style.display = originalDisplay;
+    this.contentContainerNode.appendChild(this.chartNode);
 
-    }
-    timeout(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    const chartNodeContext = this.chartNode.getContext("2d");
+    this.Chart = new Chart(chartNodeContext, chartConfigData);
+  }
+  hideLoader() {
+    this.loaderNodeContainer.classList.add("d-none");
+  }
+  showLoader() {
+    this.loaderNodeContainer.classList.remove("d-none");
+  }
+  async refreshChart() {
+    let originalDisplay = this.chartNode.style.display;
+    this.chartNode.style.display = "none";
+    this.chartNode.getContext("2d").width = "100%";
+    this.chartNode.getContext("2d").height = 300;
+
+    await this.timeout(0);
+    this.chartNode.style.display = originalDisplay;
+  }
+  timeout(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 }
