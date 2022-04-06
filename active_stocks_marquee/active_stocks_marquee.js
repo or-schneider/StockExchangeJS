@@ -18,7 +18,7 @@ export class ActiveStocksMarquee {
     let activeStocksData = await fetchAsync(this.activeStocksUrl);
     activeStocksData.splice(this.totalStocksToDisplay);
 
-    let activeStocksNodes = this.generateActiveStocksNodes(activeStocksData);
+    const activeStocksNodes = this.generateActiveStocksNodes(activeStocksData);
     this.marqueeComponent = new Marquee(
       this.rootNode,
       activeStocksNodes,

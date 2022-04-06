@@ -1,12 +1,15 @@
 export async function fetchAsync(url) {
-  let response = await fetch(url);
+  try {
+    const response = await fetch(url);
 
-  let data;
-  let contentType = response.headers.get("content-type");
-  if (contentType.includes("application/json")) {
-    data = await response.json();
-  } else {
-    throw new Error("Unhandled contentType " + contentType);
+    const contentType = response.headers.get("content-type");
+    if (contentType.includes("application/json")) {
+      const data = await response.json();
+      return data;
+    } else {
+      throw new Error("Unhandled contentType " + contentType);
+    }
+  } catch (error) {
+    throw error;
   }
-  return data;
 }

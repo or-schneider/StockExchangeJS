@@ -44,7 +44,7 @@ export class CompanyComparisonList {
     });
     const targetSymbolsString = targetSymbols.join(",");
 
-    let link = `${this.compareUrl}?symbols=${targetSymbolsString}`;
+    const link = `${this.compareUrl}?symbols=${targetSymbolsString}`;
 
     this.updateCompareLink(text, link, true);
   }
