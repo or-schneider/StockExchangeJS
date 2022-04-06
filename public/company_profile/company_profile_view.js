@@ -99,7 +99,7 @@ export class CompanyProfileView {
   }
   addChart(chartConfigData) {
     this.chartNode = document.createElement("canvas");
-
+    this.chartNode.style = "max-height:50%;";
     window.addEventListener("resize", this.refreshChart.bind(this), false);
 
     this.contentContainerNode.appendChild(this.chartNode);
@@ -114,10 +114,12 @@ export class CompanyProfileView {
     this.loaderNodeContainer.classList.remove("d-none");
   }
   async refreshChart() {
+    // The following is done so that when screen size changes, flexbox could take into account the new size of the chart
+    // Without this css set up flex-wrap would not work on screen resize
+
     let originalDisplay = this.chartNode.style.display;
     this.chartNode.style.display = "none";
     this.chartNode.getContext("2d").width = "100%";
-    this.chartNode.getContext("2d").height = 300;
 
     await this.timeout(0);
     this.chartNode.style.display = originalDisplay;
