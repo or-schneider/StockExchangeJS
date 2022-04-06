@@ -70,9 +70,13 @@ export class CompanyProfileView {
     this.stockPriceChangesNode.classList.add("price-changes");
     this.stockPricesContainerNode.appendChild(this.stockPriceChangesNode);
 
-    this.descriptionNode = document.createElement("p");
-    // this.descriptionNode.classList.add("");
+    this.descriptionNode = document.createElement("div");
+    this.descriptionNode.classList.add("company-profile-description-container");
     this.contentContainerNode.appendChild(this.descriptionNode);
+
+    this.descriptionNodeText = document.createElement("p");
+    this.descriptionNodeText.classList.add("company-profile-description-text");
+    this.descriptionNode.appendChild(this.descriptionNodeText);
 
     return this.containerNode;
   }
@@ -90,7 +94,7 @@ export class CompanyProfileView {
       this.stockPriceChangesNode,
       companyData.profile.changesPercentage
     );
-    this.descriptionNode.textContent = companyData.profile.description;
+    this.descriptionNodeText.textContent = companyData.profile.description;
     this.linkNode.href = companyData.profile.website;
   }
   addChart(chartConfigData) {

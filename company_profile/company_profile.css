@@ -30,6 +30,23 @@
 .company-profile-name {
   font-weight: 400;
 }
+.company-profile-description-container {
+  max-height: 40vh;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #2b2a2a3a transparent;
+  padding: 4px;
+}
+.company-profile-description-container::-webkit-scrollbar {
+  width: 0.3rem;
+}
+.company-profile-description-container::-webkit-scrollbar-thumb {
+  background-color: #2b2a2a3a;
+  border-radius: 10px;
+}
+.company-profile-description-text {
+  font-weight: 400;
+}
 .company-profile-stock-price-label,
 .company-profile-stock-price,
 .company-profile-stock-price-changes {
