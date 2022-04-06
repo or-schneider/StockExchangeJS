@@ -18,7 +18,7 @@ export class CompanyProfile {
   async load() {
     this.view.showLoader();
 
-    let companyData = await fetchCompanyDataAsync(this.symbol);
+    const companyData = await fetchCompanyDataAsync(this.symbol);
 
     this.view.updateProfileView(companyData);
 
@@ -28,8 +28,8 @@ export class CompanyProfile {
   async addChart() {
     this.view.showLoader();
 
-    let historicalPriceData = await fetchHistoricalPriceAsync(this.symbol);
-    let chartConfigData = this.chartConfig.generate(historicalPriceData);
+    const historicalPriceData = await fetchHistoricalPriceAsync(this.symbol);
+    const chartConfigData = this.chartConfig.generate(historicalPriceData);
 
     this.view.addChart(chartConfigData);
 
