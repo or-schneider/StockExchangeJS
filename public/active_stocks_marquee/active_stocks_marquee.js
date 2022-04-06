@@ -1,4 +1,4 @@
-import { fetchAsync } from "../scripts/fetch_async.js";
+import { fetchAsync } from "../../scripts/fetch_async.js";
 import { Marquee } from "./marquee/marquee.js";
 export class ActiveStocksMarquee {
   rootNode;
